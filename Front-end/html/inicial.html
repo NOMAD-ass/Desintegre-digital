@@ -5,25 +5,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/inicial.css">
-    <script src="../js/inicial.js"></script>
+    <script defer src="../js/inicial.js" ></script>
     <title>Desentrege Digital</title>
 </head>
 
-<body class = "tema-claro">
+<body class = "tema-escuro">
     <header>
 
     </header>
     <nav>
-        <div class="mobile-menu" id="mobile-Menu">
+        <div class="mobile-menu" >
             <div class="line1"></div>
             <div class="line2"></div>
             <div class="line3"></div>
         </div>
-        <ul class="nav-links">
+        <ul class="nav-list">
             <li><a href="#">Home</a></li>
             <li><a href="#">Serviços</a></li>
             <li><a href="#">Sobre</a></li>
             <li><a href="#">Contato</a></li>
+
+            
+            <button id="botaoTema" onclick="alternarTema()">
+            <img  src="../icon/lua.png" alt="Ícone de tema">
+            
+            </button>
+
+
+            <button id = "mudar-tema">
+                
+            </button>
+            
         </ul>
 
     </nav>

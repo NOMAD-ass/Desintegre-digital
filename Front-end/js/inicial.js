@@ -1,30 +1,63 @@
-class MobileMenu {
-    constructor(mobileMenu, navLinks) {
-        this.mobileMenu = document.querySelector(mobileMenu);
-        this.navLinks = document.querySelector(navLinks);
-        this.activeClass = "active";
+///Menu responsivo//
+class MobileNavbar {
+  constructor(mobileMenu, navList, navLinks) {
+    this.mobileMenu = document.querySelector(mobileMenu);
+    this.navList = document.querySelector(navList);
+    this.navLinks = document.querySelectorAll(navLinks);
+    this.activeClass = "active";
 
-        this.handleClick = this.handleClick.bind(this);
-    }
-    
-    handleClick() {
-        console.log(this);
-        this.navLinks.classList.toggle(this.activeClass);
-    }
+    this.handleClick = this.handleClick.bind(this);
+  }
 
-    addClickEvent() {
-        this.mobileMenu.addEventListener("click",this.handleClick());
-    }
+  animateLinks() {
+    this.navLinks.forEach((link, index) => {
+      link.style.animation
+        ? (link.style.animation = "")
+        : (link.style.animation = `navLinkFade 0.5s ease forwards ${
+            index / 7 + 0.3
+          }s`);
+    });
+  }
 
-    init() {
-        if (this.mobileMenu) {
-            this.addClickEvent();
-        }
-        return this;
-    }
+  handleClick() {
+    this.navList.classList.toggle(this.activeClass);
+    this.mobileMenu.classList.toggle(this.activeClass);
+    this.animateLinks();
+  }
 
+  addClickEvent() {
+    this.mobileMenu.addEventListener("click", this.handleClick);
+  }
+
+  init() {
+    if (this.mobileMenu) {
+      this.addClickEvent();
+    }
+    return this;
+  }
 }
 
-const mobileMenu = new MobileMenu(".mobile-menu", ".nav-links", ".nav-links li",);
-mobileMenu.init();
+const mobileNavbar = new MobileNavbar(
+  ".mobile-menu",
+  ".nav-list",
+  ".nav-list li",
+);
+mobileNavbar.init();
 
+
+
+
+function alternarTema() {
+  
+  const corpoSite = document.body;
+  const imagem = document.getElementById("iconeTema");
+  
+  
+  corpoSite.classList.toggle("tema-claro");
+  
+ 
+  if (corpoSite.classList.contains("tema-claro")) {
+    imagem.src = "../icon/lua.png";   } else {
+    imagem.src = "../icon/sol.png"; 
+  }
+}
