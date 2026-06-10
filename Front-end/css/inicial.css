@@ -1,5 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght=0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+/* =======================================
+   CONFIGURAÇÕES GERAIS / RESETS
+   ======================================= */
 * {
     margin: 0;
     padding: 0;
@@ -14,8 +17,9 @@
     --font-family: 'Poppins', sans-serif;
     --color-text: #efedec;
     --color-text-secondary: #000000;
+    --font-size-small: 1rem;
+    --font-size-medi: 1.4rem
 }
-
 
 .tema-claro {
     --primary-color: #020b1a;         
@@ -27,9 +31,12 @@
     --color-text-secondary: #a0aec0;
 }
 
+body {
+    font-family: var(--font-family);
+    background-color: var(--primary-color);
+}
 
-/* Barra de navegacao */
-
+/* Links globais */
 a {
     color: var(--color-text);
     text-decoration: none;
@@ -43,13 +50,29 @@ a:hover {
     opacity: 0.7;
 }
 
+/* Tag Main Semântica (Apenas o container geral) */
+main {
+    display: block;
+    width: 100%;
+}
+
+
+/* =======================================
+   BARRA DE NAVEGAÇÃO (NAV)
+   ======================================= */
 nav {
+     top: 0;            /* Cola no topo da página */
+    left: 0;
+    width: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;
     font-family: var(--font-family);
     background: var(--primary-color);
     height: 8vh;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
+    position: fixed;
+    z-index: 1000;
 }
 
 .nav-list {
@@ -62,7 +85,7 @@ nav {
     margin-left: 32px;
 }
 
-
+/* Botão de Alternar Tema */
 #botaoTema {
     background: transparent;
     border: none;
@@ -93,6 +116,7 @@ nav {
     transform: rotate(360deg) scale(1.1);
 }
 
+/* Menu Mobile */
 .mobile-menu {
     display: none;
     cursor: pointer;
@@ -106,11 +130,157 @@ nav {
     transition: 0.3s;
 }
 
+/* Divisor Colorido do Nav */
+.divisor-nav {
+    height: 5px;
+    background: linear-gradient(
+        90deg,
+        var(--secondary-color) 0%,
+        var(--quaternary-color) 50%,
+        var(--tertiary-color) 100%
+    );
+    margin-top: -5px; /* Une perfeitamente com o nav */
+}
+
+
+/* =======================================
+   SEÇÃO BANNER / HERO
+   ======================================= */
+.banner-fundo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 10%; 
+    height: 92vh; /* Ocupa o restante da tela visível */
+    color: var(--color-text);
+    
+    /* Imagem de fundo com gradiente escuro para dar leitura ao texto */
+    background-image: linear-gradient(
+        to right, 
+        rgba(4, 21, 49, 0.95) 0%,
+        rgba(4, 21, 49, 0.7) 50%,
+        rgba(4, 21, 49, 0.3) 100%
+    ), url('../img/talvez_o_banner.png');
+    
+    background-size: cover;
+    background-position: right center;
+    background-repeat: no-repeat;
+}
+
+.banner-conteudo {
+    max-width: 650px; /* Evita que o texto estique demais para o lado */
+}
+
+.banner-conteudo h1 {
+    font-size: 3rem; 
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.banner-conteudo .sub-heading {
+    font-size: 1.1rem;
+    font-weight: 300;
+    line-height: 1.6;
+    color: #c3c3c3; 
+    margin-bottom: 40px;
+}
+
+/* Botão do Banner */
+.botao-banner {
+    display: inline-block;
+    background-color: var(--secondary-color);
+    color: var(--color-text);
+    padding: 15px 35px;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    transition: background-color 0.3s, transform 0.2s;
+    cursor: pointer;
+}
+
+.botao-banner:hover {
+    background-color: var(--secondary-color); 
+    transform: translateY(-2px); 
+    color: #ffffff; 
+    box-shadow: 0 5px 15px rgba(42, 167, 134, 0.4);
+}
+
+.botao-banner:active {
+    transform: translateY(0);
+}
+
+
+/* =======================================
+   SEÇÃO SEPARADA: SOBRE NÓS
+   ======================================= */
+.sobre {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 90px 10%; /* Espaçamento interno grande para dar "respiro" à seção */
+    background-color: #ffffff; /* Fundo branco para criar contraste claro/escuro */
+    color: #333333; /* Cor de texto escura e legível para fundo claro */
+}
+
+.titulo-sobre {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    position: relative;
+}
+
+/* Linha decorativa abaixo do título "Sobre nós" */
+.titulo-sobre::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background-color: var(--quaternary-color);
+    margin: 10px auto 0 auto;
+    border-radius: 2px;
+}
+
+.descricao-sobre {
+    max-width: 800px; /* Limita largura do texto para leitura confortável */
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555555;
+    margin-bottom: 35px;
+}
+
+/* Botão do Sobre Nós */
+.botao-sobre {
+    display: inline-block;
+    background-color: var(--tertiary-color);
+    color: #ffffff;
+    padding: 12px 35px;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.botao-sobre:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+    color: #ffffff;
+}
+
+
+/* =======================================
+   RESPONSIVIDADE (MEDIA QUERIES)
+   ======================================= */
 @media (max-width: 999px) {
     body {
         overflow-x: hidden;
     }
     
+    /* Nav Mobile */
     nav {
         justify-content: space-between;
         padding: 0 20px;
@@ -151,154 +321,125 @@ nav {
     .nav-list li:last-child {
         border-bottom: none;
     }
-}
 
-.nav-list.active {
-    transform: translateX(0);
-}
+    .nav-list.active {
+        transform: translateX(0);
+    }
 
-.mobile-menu.active .line1 {
-    transform: rotate(-45deg) translate(-8px, 8px);
-}
+    /* Animação do Hamburguer para X */
+    .mobile-menu.active .line1 {
+        transform: rotate(-45deg) translate(-8px, 8px);
+    }
 
-.mobile-menu.active .line2 {
-    opacity: 0;
-}
+    .mobile-menu.active .line2 {
+        opacity: 0;
+    }
 
-.mobile-menu.active .line3 {
-    transform: rotate(45deg) translate(-5px, -7px);
-}
+    .mobile-menu.active .line3 {
+        transform: rotate(45deg) translate(-5px, -7px);
+    }
 
-
-
-/* Banner (Hero Section) */
-
-
-main {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 10%; /* Espaçamento nas laterais para telas grandes */
-    height: 92vh; /* Ocupa a altura restante da tela (100vh - 8vh do nav) */
-    background-color: var(--primary-color);
-    color: var(--color-text);
-    font-family: var(--font-family);
-}
-
-.left {
-    flex: 1; /* Ocupa metade do espaço */
-    padding-right: 50px;
-}
-
-.left h1 {
-    font-size: 3rem; /* Tamanho do título principal */
-    font-weight: 700;
-    line-height: 1.2;
-    margin-bottom: 20px;
-}
-
-.left .sub-heading {
-    font-size: 1.1rem;
-    font-weight: 300;
-    line-height: 1.6;
-    color: #c3c3c3; /* Cor um pouco mais suave para o subtítulo */
-    margin-bottom: 40px;
-}
-
-/* Estilo do Botão */
-.botao-banner {
-    display: inline-block;
-    background-color: var(--secondary-color);
-    color: var(--color-text);
-    padding: 15px 35px;
-    border-radius: 5px;
-    font-weight: 600;
-    font-size: 1.1rem;
-    text-transform: uppercase;
-    transition: background-color 0.3s, transform 0.2s;
-    border: none; /* Caso use a tag <button> */
-    cursor: pointer; /* Caso use a tag <button> */
-}
-
-.botao-banner:hover {
-    border: solid var(--secondary-color);
-    background-color: var(--secondary-color); /* Um tom mais escuro de verde no hover */
-    transform: translateY(-2px); /* Pequeno efeito de levantar */
-    color: #ffffff; /* Garante que o texto continue branco */
-}
-
-.botao-banner:active {
-    transform: translateY(0);
-}
-
-.right {
-    flex: 1; /* Ocupa a outra metade */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.right img {
-    max-width: 100%;
-    height: auto;
-    object-fit: contain;
-}
-
-
-
-/* Banner com imagem de fundo */
-/*Banner com imagem de fundo */
-.banner-fundo {
-    background-image: linear-gradient(
-        to right, 
-        rgba(4, 21, 49, 0.95) 0%,
-        rgba(4, 21, 49, 0.7) 50%,
-        rgba(4, 21, 49, 0.3) 100%
-    ), url('../img/talvez_o_banner.png');
-    
-    background-size: cover;
-    background-position: right center;
-    background-repeat: no-repeat;
-}
-
-main {
-    justify-content: flex-start;
-    padding-left: 10%;
-}
-
-/* Removeu-se: .banner-fundo .left { background:... } */
-
-@media (max-width: 999px) {
+    /* Banner Responsivo */
     .banner-fundo {
+        padding: 0 40px;
         background-image: linear-gradient(
             to bottom,
             rgba(4, 21, 49, 0.95) 0%,
-            rgba(4, 21, 49, 0.7) 50%,
-            rgba(4, 21, 49, 0.3) 100%
+            rgba(4, 21, 49, 0.8) 60%,
+            rgba(4, 21, 49, 0.4) 100-px
         ), url('../img/talvez_o_banner.png');
-        background-size: cover;
         background-position: center;
     }
+
     
-    main {
-        padding-left: 20px;
-        padding-right: 20px;
+    
+/* =======================================
+   SEÇÃO SEPARADA: SOBRE NÓS (SEM IMAGEM)
+   ======================================= */
+.sobre {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 90px 10%; /* Espaçamento interno grande para dar "respiro" */
+    background-color: #ffffff; /* Fundo branco para criar contraste claro/escuro */
+    color: #333333;
+}
+
+.sobre-container {
+    width: 100%;
+    max-width: 800px; /* Limita a largura para o texto não esticar demais no desktop */
+    margin: 0 auto;
+}
+
+.sobre-conteudo {
+    text-align: center; /* Centraliza o texto e o botão */
+}
+
+.titulo-sobre {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--quaternary-color);
+    margin-bottom: 20px;
+    position: relative;
+}
+
+/* Linha decorativa abaixo do título "Sobre nós" */
+.titulo-sobre::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background-color: var(--quaternary-color);
+    margin: 10px auto 0 auto; /* Centralizado junto com o título */
+    border-radius: 2px;
+}
+
+.descricao-sobre {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555555;
+    margin-bottom: 20px;
+}
+
+/* Botão do Sobre Nós */
+.botao-sobre {
+    display: inline-block;
+    background-color: var(--secondary-color);
+    color: #ffffff;
+    padding: 12px 35px;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-top: 15px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.botao-sobre:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+    color: #ffffff;
+}
+
+/* =======================================
+   RESPONSIVIDADE (MEDIA QUERY)
+   ======================================= */
+@media (max-width: 999px) {
+    .sobre {
+        padding: 60px 20px;
+    }
+    
+    .titulo-sobre {
+        font-size: 2rem;
+    }
+
+    .descricao-sobre {   
+        font-size: 1rem;
     }
 }
 
-nav {
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
-    position: relative;
-    z-index: 10;
-}
 
-.divisor-nav {
-    height: 5px;
-    background: linear-gradient(
-        90deg,
-        var(--secondary-color) 0%,
-        var(--quaternary-color) 50%,
-        var(--tertiary-color) 100%
-    );
-    margin-top: -5px; /* Une com o nav */
+
+        
+        
+    
 }

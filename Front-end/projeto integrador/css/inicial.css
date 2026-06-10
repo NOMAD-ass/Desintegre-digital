@@ -1,0 +1,118 @@
+:root {
+    --primary-color: ;
+    --secondary-color: ;
+    --text-color: ;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    font-family: 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.escuro {
+    --primary-color: darkblue ;
+    --secondary-color: grey ;
+    --text-color: black ;
+} 
+
+header {
+    margin: 20px;
+    border: 10px;
+    border-radius: 4px;
+
+    display: flex;
+    gap: 5px 10px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    background-color: darkgrey;
+}
+
+header button {
+    position: relative;
+    top: 10px;
+    right: 20px;
+
+    padding: 8px 16px;
+    border: 2px solid;
+    border-radius: 45%;
+    background-color: lightcyan;
+
+    color: black;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+header button:hover {
+    padding: 8px 16px;
+    border: 3px solid;
+    background-color: lightcyan;
+    color: black;
+}
+
+header button:active {
+    border: 4px solid;
+    background-color: cyan;
+    color: black;
+}
+
+header img {
+    width: 75px;
+}
+
+header h1 {
+    font-size: 30px;
+}
+
+.inicial {
+    width: 70px;
+    padding: 7px 14px;
+    border: 3px solid;
+    background-color: cyan;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.inicial h2 {
+    text-align: ;
+    margin-bottom: ;
+}
+
+.inicial h2 {
+    text-align: left;
+    margin-bottom: ;
+}
+    
+.lightbox {
+    display: flex;
+    position: ;
+    top: ;
+    left: ;
+    width: ;
+    height: ;
+    background: ;
+    align-items: ;
+    justify-content: ;
+}
+
+.lightbox-img {
+    max-width: ;
+    max-height: ;
+    border-radius: ;
+}
+
+.fechar {
+    position: ;
+    top: ;
+    right; ;
+    font-size: ;
+    color: ;
+    cursor: ;
+}
