@@ -1,4 +1,3 @@
-///Menu responsivo//
 class MobileNavbar {
   constructor(mobileMenu, navList, navLinks) {
     this.mobileMenu = document.querySelector(mobileMenu);
@@ -9,55 +8,49 @@ class MobileNavbar {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  animateLinks() {
-    this.navLinks.forEach((link, index) => {
-      link.style.animation
-        ? (link.style.animation = "")
-        : (link.style.animation = `navLinkFade 0.5s ease forwards ${
-            index / 7 + 0.3
-          }s`);
-    });
-  }
-
   handleClick() {
     this.navList.classList.toggle(this.activeClass);
     this.mobileMenu.classList.toggle(this.activeClass);
-    this.animateLinks();
   }
 
   addClickEvent() {
-    this.mobileMenu.addEventListener("click", this.handleClick);
+    if (this.mobileMenu) {
+      this.mobileMenu.addEventListener("click", this.handleClick);
+    }
   }
 
   init() {
-    if (this.mobileMenu) {
-      this.addClickEvent();
-    }
+    this.addClickEvent();
     return this;
   }
 }
 
-const mobileNavbar = new MobileNavbar(
-  ".mobile-menu",
-  ".nav-list",
-  ".nav-list li",
-);
-mobileNavbar.init();
+document.addEventListener("DOMContentLoaded", () => {
+  // Inicializa o menu responsivo
+  const mobileNavbar = new MobileNavbar(".mobile-menu", ".nav-list", ".nav-list li");
+  mobileNavbar.init();
 
+  // Lógica do botão de tema alternando suas imagens originais
+  const botao = document.querySelector('#botaoTema');
+  const icone = document.querySelector('#iconeTema');
+  
+  if (botao && icone) {
+    botao.addEventListener('click', () => {
+      icone.classList.add('rodar-icone');
+      
+      setTimeout(() => {
+        icone.classList.remove('rodar-icone');
+      }, 500);
 
-
-
-function alternarTema() {
-  
-  const corpoSite = document.body;
-  const imagem = document.getElementById("iconeTema");
-  
-  
-  corpoSite.classList.toggle("tema-claro");
-  
- 
-  if (corpoSite.classList.contains("tema-claro")) {
-    imagem.src = "../icon/lua.png";   } else {
-    imagem.src = "../icon/sol.png"; 
+      if (document.body.classList.contains('tema-claro')) {
+        document.body.classList.remove('tema-claro');
+        document.body.classList.add('tema-escuro');
+        icone.src = "../icon/lua.png";
+      } else {
+        document.body.classList.remove('tema-escuro');
+        document.body.classList.add('tema-claro');
+        icone.src = "../icon/sol.png";
+      }
+    });
   }
-}
+});
