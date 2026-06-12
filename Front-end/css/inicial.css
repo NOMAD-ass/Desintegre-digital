@@ -18,7 +18,7 @@
     --color-text: #efedec;
     --color-text-secondary: #000000;
     --font-size-small: 1rem;
-    --font-size-medi: 1.4rem
+    --font-size-medi: 1.4rem;
 }
 
 .tema-claro {
@@ -36,7 +36,6 @@ body {
     background-color: var(--primary-color);
 }
 
-/* Links globais */
 a {
     color: var(--color-text);
     text-decoration: none;
@@ -50,18 +49,16 @@ a:hover {
     opacity: 0.7;
 }
 
-/* Tag Main Semântica (Apenas o container geral) */
 main {
     display: block;
     width: 100%;
 }
 
-
 /* =======================================
    BARRA DE NAVEGAÇÃO (NAV)
    ======================================= */
 nav {
-     top: 0;            /* Cola no topo da página */
+    top: 0;
     left: 0;
     width: 100%;
     display: flex;
@@ -85,7 +82,6 @@ nav {
     margin-left: 32px;
 }
 
-/* Botão de Alternar Tema */
 #botaoTema {
     background: transparent;
     border: none;
@@ -99,6 +95,11 @@ nav {
     border-radius: 50%;
     transition: background-color 0.3s;
     outline: none;
+}
+
+.logo {
+    width: 20px;
+    height: 20px;
 }
 
 #botaoTema:hover {
@@ -116,7 +117,6 @@ nav {
     transform: rotate(360deg) scale(1.1);
 }
 
-/* Menu Mobile */
 .mobile-menu {
     display: none;
     cursor: pointer;
@@ -130,7 +130,6 @@ nav {
     transition: 0.3s;
 }
 
-/* Divisor Colorido do Nav */
 .divisor-nav {
     height: 5px;
     background: linear-gradient(
@@ -139,9 +138,8 @@ nav {
         var(--quaternary-color) 50%,
         var(--tertiary-color) 100%
     );
-    margin-top: -5px; /* Une perfeitamente com o nav */
+    margin-top: -5px;
 }
-
 
 /* =======================================
    SEÇÃO BANNER / HERO
@@ -151,24 +149,21 @@ nav {
     align-items: center;
     justify-content: flex-start;
     padding: 0 10%; 
-    height: 92vh; /* Ocupa o restante da tela visível */
+    height: 92vh;
     color: var(--color-text);
-    
-    /* Imagem de fundo com gradiente escuro para dar leitura ao texto */
     background-image: linear-gradient(
         to right, 
         rgba(4, 21, 49, 0.95) 0%,
         rgba(4, 21, 49, 0.7) 50%,
         rgba(4, 21, 49, 0.3) 100%
     ), url('../img/talvez_o_banner.png');
-    
     background-size: cover;
     background-position: right center;
     background-repeat: no-repeat;
 }
 
 .banner-conteudo {
-    max-width: 650px; /* Evita que o texto estique demais para o lado */
+    max-width: 650px;
 }
 
 .banner-conteudo h1 {
@@ -186,7 +181,6 @@ nav {
     margin-bottom: 40px;
 }
 
-/* Botão do Banner */
 .botao-banner {
     display: inline-block;
     background-color: var(--secondary-color);
@@ -201,7 +195,6 @@ nav {
 }
 
 .botao-banner:hover {
-    background-color: var(--secondary-color); 
     transform: translateY(-2px); 
     color: #ffffff; 
     box-shadow: 0 5px 15px rgba(42, 167, 134, 0.4);
@@ -211,19 +204,26 @@ nav {
     transform: translateY(0);
 }
 
-
 /* =======================================
-   SEÇÃO SEPARADA: SOBRE NÓS
+   SEÇÃO SOBRE NÓS
    ======================================= */
 .sobre {
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    padding: 90px 10%;
+    background-color: #ffffff;
+    color: #333333;
+}
+
+.sobre-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.sobre-conteudo {
     text-align: center;
-    padding: 90px 10%; /* Espaçamento interno grande para dar "respiro" à seção */
-    background-color: #ffffff; /* Fundo branco para criar contraste claro/escuro */
-    color: #333333; /* Cor de texto escura e legível para fundo claro */
 }
 
 .titulo-sobre {
@@ -234,7 +234,6 @@ nav {
     position: relative;
 }
 
-/* Linha decorativa abaixo do título "Sobre nós" */
 .titulo-sobre::after {
     content: '';
     display: block;
@@ -246,14 +245,12 @@ nav {
 }
 
 .descricao-sobre {
-    max-width: 800px; /* Limita largura do texto para leitura confortável */
     font-size: 1.1rem;
     line-height: 1.8;
     color: #555555;
-    margin-bottom: 35px;
+    margin-bottom: 20px;
 }
 
-/* Botão do Sobre Nós */
 .botao-sobre {
     display: inline-block;
     background-color: var(--tertiary-color);
@@ -262,6 +259,7 @@ nav {
     border-radius: 5px;
     font-weight: 600;
     font-size: 1rem;
+    margin-top: 15px;
     transition: background-color 0.3s, transform 0.2s;
 }
 
@@ -271,16 +269,107 @@ nav {
     color: #ffffff;
 }
 
+/* =======================================
+   SEÇÃO DIFERENCIAIS (CARDS)
+   ======================================= */
+.secao-titulo-diferencial {
+    text-align: center;
+    padding: 80px 10% 20px 10%;
+    background-color: var(--primary-color);
+}
+
+.container-titulo h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-text);
+    position: relative;
+    display: inline-block;
+}
+
+.container-titulo h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background-color: var(--secondary-color);
+    margin: 10px auto 0 auto;
+    border-radius: 2px;
+}
+
+.secao-diferenciais {
+    background-color: var(--primary-color);
+    padding: 0 10% 90px 10%;
+    display: flex;
+    justify-content: center;
+}
+
+.cards-container {
+    display: flex;
+    gap: 30px;
+    width: 100%;
+    max-width: 1200px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.card-diferencial {
+    background-color: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 40px 30px;
+    flex: 1;
+    min-width: 280px;
+    max-width: 360px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.card-diferencial:hover {
+    transform: translateY(-10px);
+    border-color: var(--secondary-color);
+    box-shadow: 0 10px 30px rgba(42, 167, 134, 0.15);
+    background-color: rgba(255, 255, 255, 0.06);
+}
+
+.card-icone {
+    width: 70px;
+    height: 70px;
+    background-color: rgba(42, 167, 134, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px auto;
+}
+
+.card-icone img {
+    width: 35px;
+    height: 35px;
+    object-fit: contain;
+}
+
+.card-diferencial h3 {
+    color: var(--color-text);
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.card-diferencial p {
+    color: #c3c3c3;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    font-weight: 300;
+}
 
 /* =======================================
-   RESPONSIVIDADE (MEDIA QUERIES)
+   RESPONSIVIDADE GERAL (MEDIA QUERIES)
    ======================================= */
 @media (max-width: 999px) {
     body {
         overflow-x: hidden;
     }
     
-    /* Nav Mobile */
     nav {
         justify-content: space-between;
         padding: 0 20px;
@@ -326,7 +415,6 @@ nav {
         transform: translateX(0);
     }
 
-    /* Animação do Hamburguer para X */
     .mobile-menu.active .line1 {
         transform: rotate(-45deg) translate(-8px, 8px);
     }
@@ -339,91 +427,17 @@ nav {
         transform: rotate(45deg) translate(-5px, -7px);
     }
 
-    /* Banner Responsivo */
     .banner-fundo {
         padding: 0 40px;
         background-image: linear-gradient(
             to bottom,
             rgba(4, 21, 49, 0.95) 0%,
             rgba(4, 21, 49, 0.8) 60%,
-            rgba(4, 21, 49, 0.4) 100-px
+            rgba(4, 21, 49, 0.4) 100%
         ), url('../img/talvez_o_banner.png');
         background-position: center;
     }
 
-    
-    
-/* =======================================
-   SEÇÃO SEPARADA: SOBRE NÓS (SEM IMAGEM)
-   ======================================= */
-.sobre {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 90px 10%; /* Espaçamento interno grande para dar "respiro" */
-    background-color: #ffffff; /* Fundo branco para criar contraste claro/escuro */
-    color: #333333;
-}
-
-.sobre-container {
-    width: 100%;
-    max-width: 800px; /* Limita a largura para o texto não esticar demais no desktop */
-    margin: 0 auto;
-}
-
-.sobre-conteudo {
-    text-align: center; /* Centraliza o texto e o botão */
-}
-
-.titulo-sobre {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--quaternary-color);
-    margin-bottom: 20px;
-    position: relative;
-}
-
-/* Linha decorativa abaixo do título "Sobre nós" */
-.titulo-sobre::after {
-    content: '';
-    display: block;
-    width: 60px;
-    height: 4px;
-    background-color: var(--quaternary-color);
-    margin: 10px auto 0 auto; /* Centralizado junto com o título */
-    border-radius: 2px;
-}
-
-.descricao-sobre {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: #555555;
-    margin-bottom: 20px;
-}
-
-/* Botão do Sobre Nós */
-.botao-sobre {
-    display: inline-block;
-    background-color: var(--secondary-color);
-    color: #ffffff;
-    padding: 12px 35px;
-    border-radius: 5px;
-    font-weight: 600;
-    font-size: 1rem;
-    margin-top: 15px;
-    transition: background-color 0.3s, transform 0.2s;
-}
-
-.botao-sobre:hover {
-    background-color: var(--secondary-color);
-    transform: translateY(-2px);
-    color: #ffffff;
-}
-
-/* =======================================
-   RESPONSIVIDADE (MEDIA QUERY)
-   ======================================= */
-@media (max-width: 999px) {
     .sobre {
         padding: 60px 20px;
     }
@@ -435,11 +449,27 @@ nav {
     .descricao-sobre {   
         font-size: 1rem;
     }
-}
 
-
-
-        
-        
+    .secao-titulo-diferencial {
+        padding: 60px 20px 10px 20px;
+    }
     
+    .container-titulo h2 {
+        font-size: 2rem;
+    }
+
+    .secao-diferenciais {
+        padding: 0 20px 60px 20px;
+    }
+
+    .cards-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .card-diferencial {
+        max-width: 100%;
+        width: 100%;
+    }
 }
