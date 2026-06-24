@@ -9,33 +9,52 @@
     box-sizing: border-box;
 }
 
+/* Garante que nada vaze para os lados gerando barras brancas no mobile */
+html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
 /* =======================================
-   VARIÁVEIS (DARK / LIGHT)
+   VARIÁVEIS DE COR (DARK / LIGHT)
    ======================================= */
 :root {
-    /* Cores de Identidade */
-    --secondary-color: #2aa786;   /* Verde */
-    --tertiary-color: #0e606a;    /* Azul Ciano */
-    --quaternary-color: #9d54e3;  /* Roxo */
+    --secondary-color: #2aa786;   
+    --tertiary-color: #0e606a;    
+    --quaternary-color: #9d54e3;  
     --font-family: 'Poppins', sans-serif;
 
-    /* Estrutura do Modo Escuro (Padrão) */
+    /* Novas Paletas Recomendadas (Modo Escuro) */
+    --secondary-hover: #34c7a1;     
+    --quaternary-hover: #b070f0;    
+    --bg-input: #0b2246;            
+    --border-color: rgba(255, 255, 255, 0.1); 
+    --text-muted: #94a3b8;          
+
+    /* Estrutura de Cores Globais */
     --bg-main: #041531;           
     --bg-card: rgba(255, 255, 255, 0.05); 
     --color-text: #efedec;        
     --color-text-inverted: #000000; 
-    --nav-bg: rgba(4, 21, 49, 0.6); /* Nav transparente com fundo escuro */
+    --nav-bg: rgba(4, 21, 49, 0.75); 
 }
 
 .tema-claro {
-    /* Estrutura do Modo Claro */
+    /* Novas Paletas Recomendadas (Modo Claro) */
+    --secondary-hover: #166a52;     
+    --quaternary-hover: #611fa1;    
+    --bg-input: #ffffff;            
+    --border-color: rgba(0, 0, 0, 0.1); 
+    --text-muted: #475569;          
+
+    /* Estrutura de Cores Globais */
     --bg-main: #f8fafc;           
     --bg-card: #ffffff;           
     --color-text: #0f172a;        
     --color-text-inverted: #ffffff; 
-    --nav-bg: rgba(248, 250, 252, 0.6); /* Nav transparente com fundo claro */
+    --nav-bg: rgba(248, 250, 252, 0.75); 
     
-    /* Ajustes de contraste para modo claro */
     --secondary-color: #1b8568;   
     --tertiary-color: #0b4d55;    
     --quaternary-color: #7c29cc;  
@@ -49,7 +68,6 @@ body {
     background-color: var(--bg-main);
     color: var(--color-text);
     transition: background-color 0.3s ease, color 0.3s ease; 
-    overflow-x: hidden;
 }
 
 a {
@@ -60,9 +78,9 @@ a {
     border: none;
 }
 
-a:hover {
-    color: var(--secondary-color);
-    opacity: 0.7;
+img {
+    max-width: 100%;
+    height: auto;
 }
 
 main {
@@ -71,42 +89,65 @@ main {
 }
 
 /* =======================================
-   BARRA DE NAVEGAÇÃO (NAV)
+   BARRA DE NAVEGAÇÃO FIXED
    ======================================= */
 nav {
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center; 
-    font-family: var(--font-family);
-    background-color: var(--nav-bg); /* Transparência dinâmica */
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
     height: 10vh; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    background-color: var(--nav-bg); 
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15);
-    position: fixed;
     z-index: 1000;
-    padding: 0 20px;
+    padding: 0 10%;
     transition: background-color 0.3s ease;
 }
 
-.logo {
-    height: 6vh; 
-    width: auto;  
-    max-height: 55px; 
-    object-fit: contain;
+.logo-placeholder {
+    font-size: 1.5rem;
+    font-weight: 700;
+    z-index: 1010;
 }
 
 .nav-list {
     list-style: none;
     display: flex;
+    align-items: center;
+    gap: 32px;
 }
 
-.nav-list li {
-    letter-spacing: 3px;
-    margin-left: 32px;
+.nav-list li a {
+    position: relative;
+    display: inline-block;
+    color: var(--color-text);
+    font-family: var(--font-family);
+    font-size: 1rem; 
+    font-weight: 500; 
+    transition: color 0.3s ease-in-out;
+}
+
+.nav-list li a:before {
+    display: inline-block;
+    content: attr(data-text); 
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    max-width: 0%;
+    max-height: 100%;
+    color: var(--secondary-color); 
+    white-space: nowrap; 
+    transition: max-width 0.3s ease-in-out;
+}
+
+.nav-list li a:hover:before {
+    max-width: 100%;
 }
 
 #botaoTema {
@@ -122,6 +163,7 @@ nav {
     border-radius: 50%;
     transition: background-color 0.3s;
     outline: none;
+    z-index: 1010;
 }
 
 #botaoTema:hover {
@@ -145,12 +187,13 @@ nav {
     background: transparent;
     border: none;
     outline: none;
+    z-index: 1010;
 }
 
 .mobile-menu div {
     width: 32px;
     height: 3px;
-    background-color: var(--color-text); /* Muda de cor com o tema */
+    background-color: var(--color-text); 
     margin: 6px;
     transition: 0.3s;
 }
@@ -163,18 +206,19 @@ nav {
         var(--quaternary-color) 50%,
         var(--tertiary-color) 100%
     );
-    margin-top: 10vh; 
+    position: relative;
+    z-index: 1005;
 }
 
 /* =======================================
-   SEÇÃO BANNER / HERO
+   SEÇÃO BANNER (FUNDO EMBAIXO DA NAV)
    ======================================= */
 .banner-fundo {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    padding: 0 10%; 
-    height: 92vh;
+    padding: 12vh 10% 0 10%; /* Adicionado preenchimento sutil para o topo */
+    height: 100vh; /* Ocupa 100% do tamanho da tela do dispositivo */
     color: white;
     background-image: linear-gradient(
         to right, 
@@ -202,7 +246,7 @@ nav {
     font-size: 1.1rem;
     font-weight: 300;
     line-height: 1.6;
-    color: #c3c3c3; 
+    color: var(--text-muted); 
     margin-bottom: 40px;
 }
 
@@ -216,12 +260,11 @@ nav {
     font-size: 1.1rem;
     text-transform: uppercase;
     transition: background-color 0.3s, transform 0.2s;
-    cursor: pointer;
 }
 
 .botao-banner:hover {
+    background-color: var(--secondary-hover); 
     transform: translateY(-2px); 
-    color: #ffffff; 
     box-shadow: 0 5px 15px rgba(42, 167, 134, 0.4);
 }
 
@@ -235,7 +278,6 @@ nav {
     padding: 90px 10%;
     background-color: var(--bg-main);
     color: var(--color-text);
-    transition: background-color 0.3s, color 0.3s;
 }
 
 .sobre-container {
@@ -292,9 +334,7 @@ nav {
     background-color: var(--bg-main);
     padding: 80px 10%;
     text-align: center;
-    font-family: var(--font-family);
     color: var(--color-text);
-    transition: background-color 0.3s, color 0.3s;
 }
 
 .servicos-titulo {
@@ -350,7 +390,6 @@ nav {
     transition: transform 0.5s ease, box-shadow 0.5s ease;
 }
 
-/* Brilho Holográfico Verde nos Serviços */
 .card-servico::before {
     content: '';
     position: absolute;
@@ -416,7 +455,7 @@ nav {
 }
 
 .card-servico h3 {
-    color: #000000; /* Preto fixo para contraste com o card cinza */
+    color: #000000; 
     font-size: 1.15rem;
     font-weight: 700;
     text-align: left;
@@ -461,11 +500,11 @@ nav {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
-    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
 /* =======================================
-   SEÇÃO DIFERENCIAIS (COM EFEITO HOLOGRÁFICO)
+   SEÇÃO DIFERENCIAIS
    ======================================= */
 .secao-total-diferencial {
     background-image: url('../img/diferencial.png'); 
@@ -528,7 +567,6 @@ nav {
     transition: transform 0.5s ease, box-shadow 0.5s ease, border-color 0.3s ease;
 }
 
-/* Brilho Holográfico Roxo nos Diferenciais */
 .card-diferencial::before {
     content: '';
     position: absolute;
@@ -552,7 +590,7 @@ nav {
 
 .card-diferencial:hover {
     transform: translateY(-10px) scale(1.02);
-    border-color: var(--quaternary-color); 
+    border-color: var(--quaternary-hover); 
     box-shadow: 0 10px 30px rgba(157, 84, 227, 0.3); 
 }
 
@@ -603,9 +641,7 @@ nav {
 .secao-contato {
     background-color: var(--bg-main);
     padding: 100px 10%;
-    font-family: var(--font-family);
     color: var(--color-text);
-    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .titulo-contato {
@@ -613,7 +649,6 @@ nav {
     font-size: 3.5rem;
     font-weight: 800;
     margin-bottom: 50px;
-    letter-spacing: -1px;
 }
 
 .contato-container {
@@ -666,7 +701,7 @@ nav {
 .contato-formulario input, 
 .contato-formulario textarea {
     width: 100%;
-    background-color: transparent;
+    background-color: var(--bg-input); 
     border: 2px solid var(--secondary-color);
     border-radius: 15px;
     padding: 18px 25px;
@@ -674,7 +709,12 @@ nav {
     font-family: var(--font-family);
     font-size: 1rem;
     outline: none;
-    transition: box-shadow 0.3s ease;
+    transition: border-color 0.3s;
+}
+
+.contato-formulario input:focus, 
+.contato-formulario textarea:focus {
+    border-color: var(--secondary-hover);
 }
 
 .contato-formulario input::placeholder, 
@@ -694,7 +734,11 @@ nav {
     font-size: 1rem;
     cursor: pointer;
     text-transform: uppercase;
-    transition: transform 0.2s, opacity 0.3s;
+    transition: transform 0.2s, background-color 0.3s;
+}
+
+.botao-enviar:hover {
+    background-color: var(--secondary-hover);
 }
 
 /* =======================================
@@ -705,13 +749,7 @@ footer {
     background-color: var(--bg-main);
     color: var(--color-text);
     padding: 30px 10%;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    font-family: var(--font-family);
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.tema-claro footer {
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-top: 1px solid var(--border-color);
 }
 
 .rodape-container {
@@ -737,7 +775,6 @@ footer {
 .rodape-links a {
     font-size: 0.9rem;
     color: var(--color-text);
-    transition: color 0.3s ease;
 }
 
 .rodape-links a:hover {
@@ -745,21 +782,24 @@ footer {
 }
 
 /* =======================================
-   RESPONSIVIDADE GERAL (MEDIA QUERIES)
+   RESPONSIVIDADE (MEDIA QUERIES)
    ======================================= */
 @media (max-width: 999px) {
+    nav {
+        padding: 0 20px;
+    }
+
     .mobile-menu {
         display: block; 
     }
 
-    /* Coluna Lateral Mobile Conectada e Transparente */
     .nav-list {
         position: absolute;
-        top: 10vh; /* Exatamente abaixo do nav */
+        top: 10vh; 
         left: 0;
-        width: 60vw;
+        width: 65vw;
         height: 90vh;
-        background-color: rgba(4, 21, 49, 0.85); /* Fundo com transparência escuro */
+        background-color: var(--bg-main); 
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
         flex-direction: column;
@@ -768,18 +808,16 @@ footer {
         transform: translateX(-100%);
         transition: transform 0.3s ease-in;
         padding-top: 20px;
-        z-index: 10;
-        margin-top: 0;
+        gap: 0;
     }
 
-    .tema-claro .nav-list {
-        background-color: rgba(248, 250, 252, 0.85); /* Transparência claro */
+    .nav-list li a:before {
+        display: none !important;
     }
 
     .nav-list li {
-        margin-left: 0;
         text-align: center;
-        border-bottom: 1px solid rgba(239, 237, 236, 0.1);
+        border-bottom: 1px solid var(--border-color);
     }
 
     .nav-list li a {
@@ -805,7 +843,7 @@ footer {
     }
 
     .banner-fundo {
-        padding: 0 40px;
+        padding: 14vh 24px 0 24px;
         background-image: linear-gradient(
             to bottom,
             rgba(4, 21, 49, 0.95) 0%,
@@ -813,6 +851,10 @@ footer {
             rgba(4, 21, 49, 0.4) 100%
         ), url('../img/talvez_o_banner.png');
         background-position: center;
+    }
+
+    .banner-conteudo h1 {
+        font-size: 2.2rem;
     }
 
     .sobre, .secao-servicos, .secao-titulo-diferencial {
@@ -830,7 +872,7 @@ footer {
     .servicos-container, .cards-container, .contato-container, .rodape-container {
         flex-direction: column;
         align-items: center;
-        gap: 20px;
+        gap: 25px;
         text-align: center;
     }
 

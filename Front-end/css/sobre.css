@@ -1,0 +1,201 @@
+@import "./inicial.css";
+
+/* =======================================
+   ESTILOS EXCLUSIVOS DA PÁGINA SOBRE
+   ======================================= */
+
+/* Remove o padding excessivo do topo da página */
+.conteudo-sobre {
+    display: block;
+    width: 100%;
+}
+
+/* Container centralizador padrão */
+.container-sobre {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 10%;
+}
+
+/* Banner de Introdução da página (TAMANHO REDUZIDO E ALINHADO) */
+.sobre-hero {
+    background-image: linear-gradient(
+        to bottom,
+        rgba(4, 21, 49, 0.9) 0%,
+        rgba(4, 21, 49, 0.7) 100%
+    ), url('../img/diferencial.png'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    /* CORREÇÃO DO TAMANHO */
+    height: 25vh; /* Diminuído para um tamanho mais elegante e compacto */
+    margin-top: 10vh; /* Empurra o banner para começar exatamente abaixo do menu fixo */
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.sobre-hero-titulo h1 {
+    font-size: 2.5rem; /* Ajustado sutilmente para harmonizar com a nova altura */
+    font-weight: 800;
+    color: var(--secondary-color);
+    margin-bottom: 8px;
+}
+
+.sobre-hero-titulo p {
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--text-muted);
+}
+
+/* Seção de Texto Institucional */
+.sobre-historia {
+    padding: 60px 0; /* Reduzido o espaçamento para aproximar o conteúdo */
+    background-color: var(--bg-main);
+}
+
+.bloco-texto {
+    max-width: 850px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.bloco-texto h2 {
+    font-size: 2.5rem;
+    color: var(--color-text);
+    margin-bottom: 30px;
+    position: relative;
+    display: inline-block;
+}
+
+.bloco-texto h2::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 4px;
+    background-color: var(--quaternary-color);
+    margin: 10px auto 0 auto;
+    border-radius: 2px;
+}
+
+.bloco-texto p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: var(--color-text);
+    margin-bottom: 20px;
+    font-weight: 300;
+}
+
+.bloco-texto p strong {
+    color: var(--secondary-color);
+    font-weight: 600;
+}
+
+/* Seção de Objetivo e Visão */
+.sobre-pilares {
+    padding: 20px 0 80px 0;
+    background-color: var(--bg-main);
+}
+
+.flex-pilares {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.card-pilar {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 45px 35px;
+    flex: 1;
+    min-width: 300px;
+    max-width: 520px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.4s ease, border-color 0.3s ease, box-shadow 0.4s ease;
+}
+
+.card-pilar:hover {
+    transform: translateY(-8px);
+    border-color: var(--secondary-color);
+    box-shadow: 0 10px 30px rgba(42, 167, 134, 0.15);
+}
+
+.pilar-icone {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(42, 167, 134, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    border: 1px solid rgba(42, 167, 134, 0.2);
+}
+
+.pilar-icone img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
+.card-pilar h3 {
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.card-pilar p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-text);
+    font-weight: 300;
+}
+
+.card-pilar p strong {
+    color: var(--quaternary-color);
+}
+
+/* =======================================
+   RESPONSIVIDADE (MOBILE)
+   ======================================= */
+@media (max-width: 999px) {
+    .container-sobre {
+        padding: 0 24px;
+    }
+
+    .sobre-hero {
+        height: 20vh; /* Ajuste proporcional para telas menores */
+        margin-top: 10vh;
+    }
+
+    .sobre-hero-titulo h1 {
+        font-size: 1.8rem;
+    }
+
+    .sobre-historia {
+        padding: 45px 0;
+    }
+
+    .bloco-texto h2 {
+        font-size: 2rem;
+    }
+
+    .flex-pilares {
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+    }
+
+    .card-pilar {
+        max-width: 100%;
+        width: 100%;
+        padding: 30px 20px;
+    }
+}
