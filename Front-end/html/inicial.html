@@ -177,13 +177,22 @@
                 </div>
 
                 <div class="contato-formulario">
-                    <form action="#">
+                    <form action="https://api.web3forms.com/submit" method="POST">
+
+                        <input type="hidden" name="access_key" value="COLE_SUA_CHAVE_AQUI">
+
                         <div class="input-grupo">
                             <input type="text" name="nome" placeholder="Nome" required>
                         </div>
                         <div class="input-grupo">
                             <input type="email" name="email" placeholder="Email" required>
                         </div>
+
+                        <div class="input-grupo">
+                            <input type="text" name="assunto"
+                                placeholder="Assunto" required>
+                        </div>
+
                         <div class="input-grupo">
                             <textarea name="mensagem" placeholder="Mensagem" rows="6" required></textarea>
                         </div>
