@@ -19,45 +19,33 @@ html, body {
 /* =======================================
    VARIÁVEIS DE COR (DARK / LIGHT)
    ======================================= */
+/* =======================================
+   VARIÁVEIS GLOBAIS DE COR (Padrão do Site)
+   ======================================= */
 :root {
-    --secondary-color: #2aa786;   
-    --tertiary-color: #0e606a;    
-    --quaternary-color: #9d54e3;  
+    --bg-main: #f5f7fa;          /* Fundo geral da página (Claro) */
+    --bg-card: #ffffff;          /* Fundo dos cartões/blocos (Claro) */
+    --color-text: #1e1e2a;       /* Cor do texto principal (Claro) */
+    --border-color: #e2e8f0;     /* Cor das bordas discretas */
+    
+    /* Identidade da Desintegre Digital */
+    --primary-color: #041531;    /* Azul escuro do Header/Footer */
+    --secondary-color: #2aa786;  /* Verde Água principal (Botões/Destaques) */
+    --tertiary-color: #0e606a;   /* Verde Escuro (Hover dos botões) */
+    --quartenary-color: #9d54e3; /* Roxo para detalhes específicos */
+    
+    --shadow: 0 4px 16px rgba(0,0,0,0.08);
     --font-family: 'Poppins', sans-serif;
-
-    /* Novas Paletas Recomendadas (Modo Escuro) */
-    --secondary-hover: #34c7a1;     
-    --quaternary-hover: #b070f0;    
-    --bg-input: #0b2246;            
-    --border-color: rgba(255, 255, 255, 0.1); 
-    --text-muted: #94a3b8;          
-
-    /* Estrutura de Cores Globais */
-    --bg-main: #041531;           
-    --bg-card: rgba(255, 255, 255, 0.05); 
-    --color-text: #efedec;        
-    --color-text-inverted: #000000; 
-    --nav-bg: rgba(4, 21, 49, 0.75); 
+    --border-radius: 16px;
 }
 
-.tema-claro {
-    /* Novas Paletas Recomendadas (Modo Claro) */
-    --secondary-hover: #166a52;     
-    --quaternary-hover: #611fa1;    
-    --bg-input: #ffffff;            
-    --border-color: rgba(0, 0, 0, 0.1); 
-    --text-muted: #475569;          
-
-    /* Estrutura de Cores Globais */
-    --bg-main: #f8fafc;           
-    --bg-card: #ffffff;           
-    --color-text: #0f172a;        
-    --color-text-inverted: #ffffff; 
-    --nav-bg: rgba(248, 250, 252, 0.75); 
-    
-    --secondary-color: #1b8568;   
-    --tertiary-color: #0b4d55;    
-    --quaternary-color: #7c29cc;  
+/* Transição automática quando a classe .tema-escuro for ativada no body */
+.tema-escuro {
+    --bg-main: #1a1a2e;          /* Fundo geral da página (Escuro) */
+    --bg-card: #252540;          /* Fundo dos cartões/blocos (Escuro) - O roxo fechado */
+    --color-text: #e0e0e0;       /* Cor do texto principal (Escuro) */
+    --border-color: #3a3a5c;     /* Cor das bordas no modo escuro */
+    --tertiary-color: #061f47;   /* Tom escuro complementar */
 }
 
 /* =======================================
@@ -253,7 +241,7 @@ nav {
 .botao-banner {
     display: inline-block;
     background-color: var(--secondary-color);
-    color: white;
+    color:  white;
     padding: 15px 35px;
     border-radius: 5px;
     font-weight: 600;
@@ -317,7 +305,7 @@ nav {
 
 .botao-sobre {
     display: inline-block;
-    background-color: var(--tertiary-color);
+    background-color: var(--secondary-color);
     color: #ffffff;
     padding: 12px 35px;
     border-radius: 5px;
@@ -554,7 +542,7 @@ nav {
 
 .card-diferencial {
     background-color: var(--bg-card); 
-    border: 1px solid var(--tertiary-color); 
+    border: 1px solid var(--quartenary-color); 
     backdrop-filter: blur(4px);
     border-radius: 12px;
     padding: 40px 30px;
