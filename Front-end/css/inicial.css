@@ -33,7 +33,12 @@ html, body {
     --secondary-color: #2aa786;  /* Verde Água principal (Botões/Destaques) */
     --tertiary-color: #0e606a;   /* Verde Escuro (Hover dos botões) */
     --quartenary-color: #9d54e3; /* Roxo para detalhes específicos */
-    
+    --quaternary-color: #9d54e3; /* Alias com grafia correta, usado em várias regras */
+    --quaternary-hover: #b371ea; /* Roxo mais claro para hover/bordas em destaque */
+
+    /* Fundo da barra de navegação (usa transparência p/ o efeito de vidro/blur) */
+    --nav-bg: rgba(245, 247, 250, 0.85);
+
     --shadow: 0 4px 16px rgba(0,0,0,0.08);
     --font-family: 'Poppins', sans-serif;
     --border-radius: 16px;
@@ -46,6 +51,7 @@ html, body {
     --color-text: #e0e0e0;       /* Cor do texto principal (Escuro) */
     --border-color: #3a3a5c;     /* Cor das bordas no modo escuro */
     --tertiary-color: #061f47;   /* Tom escuro complementar */
+    --nav-bg: rgba(4, 21, 49, 0.85); /* Fundo da nav no tema escuro */
 }
 
 /* =======================================
@@ -134,41 +140,68 @@ nav {
     transition: max-width 0.3s ease-in-out;
 }
 
-.nav-list li a:hover:before {
+.nav-list li a:hover:before,
+.nav-list li a.active:before {
     max-width: 100%;
 }
 
+.nav-list li a.active {
+    color: var(--secondary-color);
+}
+
+/* ==========================================================================
+   ESTILO DO BOTÃO DE TEMA CONFORME A IMAGEM DE REFERÊNCIA
+   ========================================================================== */
 #botaoTema {
-    background: transparent;
-    border: none;
+    background-color: rgba(255, 255, 255, 0.05); /* Fundo sutil escuro translúcido */
+    border: 1.5px solid rgba(255, 255, 255, 0.15); /* Borda padrão discreta */
     cursor: pointer;
-    padding: 8px;
-    width: 45px;
-    height: 45px;
+    padding: 0;
+    width: 38px;  /* Tamanho proporcional visto na imagem */
+    height: 38px; /* Tamanho proporcional visto na imagem */
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50%;
-    transition: background-color 0.3s;
+    border-radius: 8px; /* Cantos levemente suavizados conforme o print */
     outline: none;
     z-index: 1010;
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* Efeito de foco genérico ao passar o mouse */
 #botaoTema:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.12);
 }
 
+/* COMPORTAMENTO NO MODO ESCURO (Quando a Lua está ativa) */
+body.tema-escuro #botaoTema {
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.05);
+}
+
+/* COMPORTAMENTO NO MODO CLARO (Sol envolto pela cor amarela igual à imagem) */
+body.tema-claro #botaoTema {
+    background-color: rgba(212, 163, 89, 0.1); /* Fundo dourado translúcido */
+    border-color: #d4a359;                      /* Linha de contorno amarela/dourada */
+    box-shadow: 0 0 12px rgba(212, 163, 89, 0.4); /* Brilho amarelado em volta do botão */
+}
+
+body.tema-claro #botaoTema:hover {
+    background-color: rgba(212, 163, 89, 0.2);
+    box-shadow: 0 0 16px rgba(212, 163, 89, 0.6);
+}
+
+/* AJUSTE NO ÍCONE INTERNO */
 #iconeTema {
-    width: 1.4rem;
-    height: 1.4rem;
+    width: 1.1rem;  /* Reduzido ligeiramente para se ajustar dentro do contorno */
+    height: 1.1rem;
     object-fit: contain;
     transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .rodar-icone {
-    transform: rotate(360deg) scale(1.1);
+    transform: rotate(360deg) scale(1.05);
 }
-
 .mobile-menu {
     display: none;
     cursor: pointer;
