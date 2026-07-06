@@ -657,6 +657,131 @@ body.tema-claro #botaoTema:hover {
 }
 
 /* =======================================
+   SEÇÃO PARCEIROS (CARROSSEL)
+   ======================================= */
+.secao-parceiros {
+    background-color: var(--bg-card);
+    padding: 80px 0;
+    text-align: center;
+    overflow: hidden;
+}
+
+.parceiros-titulo {
+    margin-bottom: 50px;
+    padding: 0 10%;
+}
+
+.subtitulo-parceiros {
+    color: var(--secondary-color);
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    position: relative;
+    display: inline-block;
+}
+
+.subtitulo-parceiros::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--secondary-color);
+    margin-top: 2px;
+    border-radius: 2px;
+}
+
+.parceiros-titulo h2 {
+    color: var(--color-text);
+    font-size: 3rem;
+    font-weight: 800;
+    margin-top: 5px;
+}
+
+/* Faixa com máscara de degradê nas bordas, para as logos "surgirem" e
+   "sumirem" suavemente ao entrar e sair da tela */
+.carrossel-parceiros {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+
+.carrossel-parceiros-track {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    gap: 70px;
+    animation: rolagem-parceiros 32s linear infinite;
+}
+
+/* Pausa a rolagem ao passar o mouse, pra dar tempo de ler os nomes */
+.carrossel-parceiros:hover .carrossel-parceiros-track {
+    animation-play-state: paused;
+}
+
+@keyframes rolagem-parceiros {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        /* -50% porque a lista de logos está duplicada no HTML,
+           o que faz o loop parecer perfeito e sem "salto" no final */
+        transform: translateX(-50%);
+    }
+}
+
+.parceiro-logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-shrink: 0;
+    opacity: 0.55;
+    filter: grayscale(1);
+    transition: opacity 0.3s ease, filter 0.3s ease, transform 0.3s ease;
+}
+
+.parceiro-logo:hover {
+    opacity: 1;
+    filter: grayscale(0);
+    transform: translateY(-4px);
+}
+
+.parceiro-icone {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--secondary-color), var(--quaternary-color));
+    color: #ffffff;
+    font-family: var(--font-family);
+    font-weight: 800;
+    font-size: 1rem;
+    box-shadow: var(--shadow);
+}
+
+.parceiro-nome {
+    text-align: left;
+    white-space: nowrap;
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--color-text);
+}
+
+.parceiro-nome span {
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.6;
+}
+
+/* =======================================
    SEÇÃO CONTATO
    ======================================= */
 .secao-contato {
@@ -810,27 +935,51 @@ footer {
         padding: 0 20px;
     }
 
+    /* O botão de tema sai do fluxo da navbar (o "position: fixed" já tira ele
+       do lugar entre a logo e o hambúrguer) e vira um botão circular
+       flutuante, encostado no canto, acompanhando a navbar durante o scroll */
+    #botaoTema {
+        position: fixed;
+        top: calc(10vh + 14px);
+        right: 20px;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        box-shadow: var(--shadow);
+        z-index: 1010;
+    }
+
     .mobile-menu {
         display: block; 
     }
 
     .nav-list {
-        position: absolute;
-        top: 10vh; 
-        left: 0;
-        width: 65vw;
-        height: 90vh;
-        background-color: var(--bg-main); 
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        flex-direction: column;
-        align-items: stretch;
-        justify-content: flex-start;
-        transform: translateX(-100%);
-        transition: transform 0.3s ease-in;
-        padding-top: 20px;
-        gap: 0;
-    }
+    position: absolute;
+    top: 10vh; 
+    
+    /* 1. Mude de left para right */
+    right: 0;
+    left: auto; /* Garante que anule o comportamento anterior */
+    
+    width: 65vw;
+    height: 90vh;
+    background-color: var(--bg-main); 
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    
+    /* 2. Mude de -100% para 100% (para esconder o menu do lado direito) */
+    transform: translateX(100%);
+    
+    transition: transform 0.3s ease-in;
+    padding-top: 20px;
+    gap: 0;
+}
+
+/* Quando o menu estiver ativo, ele volta para a tela */
+.nav-list.active {
+    transform: translateX(0);
+}
 
     .nav-list li a:before {
         display: none !important;
@@ -847,9 +996,7 @@ footer {
         width: 100%;
     }
 
-    .nav-list.active {
-        transform: translateX(0);
-    }
+    
 
     .mobile-menu.active .line1 {
         transform: rotate(-45deg) translate(-8px, 8px);
@@ -880,6 +1027,19 @@ footer {
 
     .sobre, .secao-servicos, .secao-titulo-diferencial {
         padding: 60px 20px;
+    }
+
+    .parceiros-titulo {
+        padding: 0 20px;
+    }
+
+    .carrossel-parceiros-track {
+        gap: 40px;
+        animation-duration: 22s;
+    }
+
+    .parceiro-nome {
+        font-size: 1rem;
     }
     
     .secao-diferenciais {
