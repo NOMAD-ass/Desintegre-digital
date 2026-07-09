@@ -1,16 +1,37 @@
-DROP DATABASE IF EXISTS login; 
-CREATE DATABASE IF NOT EXISTS login; 
-USE login; 
+-- Banco de dados da Desintegre Digital
 
-CREATE TABLE cadastro ( 
-    id INT PRIMARY KEY AUTO_INCREMENT, 
-    email VARCHAR(250) NOT NULL UNIQUE, 
-    senha VARCHAR(250) NOT NULL, 
-    data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
-); 
+DROP DATABASE IF EXISTS desintegre_digital; 
 
--- Adicionado o ponto e vírgula no fina da linha abaixo:
-INSERT INTO cadastro ( email, senha, data_criacao ) 
-VALUES ( 'Arthr@59685.gmail.com', 'password123', DEFAULT ); 
+CREATE DATABASE IF NOT EXISTS desintegre_digital;
+USE desintegre_digital;
 
-SELECT id, email, senha FROM cadastro WHERE email = 'Arthr@59685.gmail.com';
+-- Tabela de usuários (login / cadastro)
+-- A senha NUNCA é salva em texto puro: o backend salva um hash (bcrypt)
+-- gerado a partir da senha digitada no cadastro.
+CREATE TABLE IF NOT EXISTS usuarios (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(150) NOT NULL,
+    email VARCHAR(250) NOT NULL UNIQUE,
+    senha VARCHAR(255) NOT NULL,
+    data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE IF NOT EXISTS messagens (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(150) NOT NULL,
+    email VARCHAR(250) NOT NULL,
+    assunto VARCHAR(250) NOT NULL,
+    mensagem TEXT NOT NULL,
+    data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  
+)
+
+-- Não existe INSERT de teste aqui de propósito: como a senha precisa
+-- estar em formato hash (bcrypt), o jeito certo de criar o primeiro
+-- usuário de teste é chamando a própria rota da API:
+--
+-- POST http://localhost:3000/api/cadastro
+-- Body (JSON): { "nome": "Teste", "email": "teste@email.com", "senha": "123456" }
+--
+-- Isso garante que a senha salva no banco já nasce no formato certo.

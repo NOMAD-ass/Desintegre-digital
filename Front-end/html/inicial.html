@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link class="tema-link" rel="stylesheet" href="../css/inicial.css">
+    <link rel="stylesheet" href="../css/auth.css">
     <script defer src="../js/inicial.js"></script>
+    <script defer src="../js/auth.js"></script>
     <title>Desintegre Digital</title>
 </head>
 
@@ -293,6 +295,81 @@
             </div>
         </div>
     </footer>
+
+    <!-- ============ MODAL DE LOGIN / CADASTRO ============ -->
+    <div id="modalAuth" class="modal-overlay">
+        <div class="modal-caixa">
+            <button type="button" id="fecharModalAuth" class="modal-fechar" aria-label="Fechar">&times;</button>
+
+            <!-- ----- PAINEL DE LOGIN ----- -->
+            <div id="painelLogin" class="modal-painel">
+                <div class="modal-titulo">
+                    <h2>Bem-vindo de volta</h2>
+                    <p>Entre com sua conta para continuar</p>
+                </div>
+
+                <div id="mensagemLogin" class="modal-mensagem"></div>
+
+                <form id="formLogin" novalidate>
+                    <div class="campo-input">
+                        <label for="loginEmail">E-mail</label>
+                        <input type="email" id="loginEmail" placeholder="seu@email.com" required>
+                    </div>
+
+                    <div class="campo-input">
+                        <label for="loginSenha">Senha</label>
+                        <input type="password" id="loginSenha" placeholder="••••••••" required>
+                    </div>
+
+                    <button type="submit" class="botao-modal-principal">Entrar</button>
+                </form>
+
+                <p class="modal-troca">
+                    Ainda não tem conta?
+                    <button type="button" id="irParaCadastro" class="botao-modal-link">Cadastre-se</button>
+                </p>
+            </div>
+
+            <!-- ----- PAINEL DE CADASTRO ----- -->
+            <div id="painelCadastro" class="modal-painel modal-painel-oculto">
+                <div class="modal-titulo">
+                    <h2>Criar conta</h2>
+                    <p>Leva menos de um minuto</p>
+                </div>
+
+                <div id="mensagemCadastro" class="modal-mensagem"></div>
+
+                <form id="formCadastro" novalidate>
+                    <div class="campo-input">
+                        <label for="cadastroNome">Nome</label>
+                        <input type="text" id="cadastroNome" placeholder="Seu nome completo" required>
+                    </div>
+
+                    <div class="campo-input">
+                        <label for="cadastroEmail">E-mail</label>
+                        <input type="email" id="cadastroEmail" placeholder="seu@email.com" required>
+                    </div>
+
+                    <div class="campo-input">
+                        <label for="cadastroSenha">Senha</label>
+                        <input type="password" id="cadastroSenha" placeholder="Mínimo 6 caracteres" required>
+                    </div>
+
+                    <div class="campo-input">
+                        <label for="cadastroConfirmarSenha">Confirmar senha</label>
+                        <input type="password" id="cadastroConfirmarSenha" placeholder="Repita a senha" required>
+                    </div>
+
+                    <button type="submit" class="botao-modal-principal">Criar conta</button>
+                </form>
+
+                <p class="modal-troca">
+                    Já tem uma conta?
+                    <button type="button" id="irParaLogin" class="botao-modal-link">Fazer login</button>
+                </p>
+            </div>
+        </div>
+    </div>
 
 </body>
 

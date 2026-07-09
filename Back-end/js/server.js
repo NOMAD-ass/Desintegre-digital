@@ -1,69 +1,21 @@
-import express from 'express';
-import cors from 'cors'
-import executarQuery from './db.js' 
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import authRoutes from "../routes/authRoutes.js";
+
+dotenv.config();
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-app.get('/login', async (req, res) =>{
-    let query = `
-    SELECT
-        id,
-        titulo,
-        conteudo,
-        caminhoImagem
-    FROM
-        noticias
-    ORDER BY
-        id DESC
-    LIMIT 10
-    `;
+// Todas as rotas de autenticação ficam sob /api
+// -> POST /api/cadastro
+// -> POST /api/login
+app.use("/api", authRoutes);
 
-   let resultado = await executaryQuery(query);
-   res.send(resulltado[0]); 
+const PORTA = process.env.PORT || 3000;
+app.listen(PORTA, () => {
+    console.log(`Servidor online em http://localhost:${PORTA}`);
 });
-
-app.post('/noticias', async (req, res) => {
-
-    var query = `
-        INSERT INTO conteudos (
-            titulo,
-            conteudo
-            caminhoImagem,
-            link
-        ) VALUES (
-         ?,
-         ?,
-         ?,
-         ?)
-    `;
-
-    var noticia = [
-        req.body.titulo,
-        req.body.conteudo,
-        req.body.imagem,
-        req.body.link
-    ];
-
-    let resultado = await executarQuery(query, conteudos);
-
-    try {
-        res.send({
-            insertId: resultado[0].insertid
-        });
-    }
-    catch {
-        console.log(`Erro ao executar Query: ${erro}`);
-    }
-    finally {
-        await conexao.end();
-    }
-});
- 
-app.listen(300, () => {
-    console.log("servidor online em "); /*adicionar o local host */
-});
-
-
