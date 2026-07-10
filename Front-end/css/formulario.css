@@ -1,3 +1,157 @@
 @import "./inicial.css";
 
-/* Estilos exclusivos da página de Formulário entram aqui. */
+/* =======================================
+   FORMULÁRIO DE SOLICITAÇÃO (COLETA / DESTRUIÇÃO)
+   ======================================= */
+
+.secao-formulario {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 60px 20px 90px;
+}
+
+.formulario-card {
+    background: var(--bg-card);
+    border-radius: var(--border-radius);
+    padding: 36px;
+    border: 1px solid var(--border-color);
+}
+
+.formulario-card h1 {
+    font-size: 1.7rem;
+    font-weight: 800;
+    color: var(--color-text);
+    margin-bottom: 8px;
+}
+
+.formulario-subtitulo {
+    color: var(--color-text);
+    opacity: 0.7;
+    font-size: 0.92rem;
+    margin-bottom: 26px;
+}
+
+/* Campos (nome, email, textarea etc.) */
+.campo { margin-bottom: 18px; }
+.campo-duplo { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.campo label { display: block; font-size: 0.88rem; font-weight: 600; margin-bottom: 6px; color: var(--color-text); }
+.obrig { color: #e53e3e; }
+
+.campo input, .campo select, .campo textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1.5px solid var(--border-color);
+    border-radius: 12px;
+    font-family: var(--font-family);
+    font-size: 0.95rem;
+    background: var(--bg-main);
+    color: var(--color-text);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+}
+
+.campo input:focus, .campo select:focus, .campo textarea:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(42, 167, 134, 0.18);
+}
+
+.campo textarea { resize: vertical; min-height: 100px; line-height: 1.5; }
+
+/* Checkboxes de serviços e radios de entrega */
+.label-servicos { margin-bottom: 10px !important; }
+
+.checkbox-container, .radio-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.opcao-checkbox, .opcao-radio {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: var(--bg-main);
+    border: 1.5px solid var(--border-color);
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.92rem;
+    color: var(--color-text);
+    transition: border-color 0.2s;
+}
+
+.opcao-checkbox:has(input:checked), .opcao-radio:has(input:checked) {
+    border-color: var(--secondary-color);
+}
+
+.opcao-checkbox input, .opcao-radio input {
+    width: auto;
+    accent-color: var(--secondary-color);
+}
+
+.entrega-group { margin-top: 6px; }
+
+/* Botão de envio */
+.btn-enviar {
+    background: linear-gradient(135deg, var(--secondary-color), var(--quaternary-color));
+    color: #fff;
+    border: none;
+    padding: 14px;
+    width: 100%;
+    border-radius: 40px;
+    font-family: var(--font-family);
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.1s;
+    margin-top: 8px;
+}
+
+.btn-enviar:hover:not(:disabled) { opacity: 0.9; transform: translateY(-1px); }
+.btn-enviar:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* Feedback de erro */
+.feedback { padding: 12px 16px; border-radius: 10px; font-size: 0.9rem; font-weight: 500; margin-bottom: 16px; }
+.feedback.erro { background: #fff5f5; color: #c53030; border: 1px solid #fed7d7; }
+
+/* Modal de protocolo (mesma linguagem visual do modal de contato/login) */
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; z-index: 2000; padding: 20px; }
+.modal-box { background: var(--bg-card); border-radius: var(--border-radius); padding: 34px 30px; text-align: center; max-width: 360px; width: 100%; border: 1px solid var(--border-color); }
+.modal-box h3 { color: var(--color-text); margin-bottom: 8px; }
+.modal-box p { color: var(--color-text); opacity: 0.75; font-size: 0.9rem; }
+.modal-icone { font-size: 2.2rem; margin-bottom: 6px; }
+.btn-fechar-modal {
+    background: var(--secondary-color);
+    color: #fff;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-top: 18px;
+    font-weight: 600;
+}
+
+.protocolo-numero {
+    font-family: var(--font-family);
+    font-size: 1.5rem !important;
+    font-weight: 800;
+    color: var(--secondary-color) !important;
+    opacity: 1 !important;
+    margin-top: 12px !important;
+    letter-spacing: 1px;
+}
+
+.link-acompanhamento {
+    display: inline-block;
+    margin-top: 14px;
+    color: var(--quaternary-color);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: underline;
+}
+
+.hidden { display: none !important; }
+
+@media (max-width: 620px) {
+    .campo-duplo { grid-template-columns: 1fr; }
+    .formulario-card { padding: 26px 20px; }
+}

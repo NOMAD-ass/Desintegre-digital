@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/acompanhamento.css">
+    <script defer src="../js/inicial.js"></script>
+    <script defer src="../js/acompanhamento.js"></script>
+    <title>Acompanhamento - Desintegre Digital</title>
+</head>
+<body class="tema-escuro">
+
+    <nav>
+        <a href="inicial.html" class="logo-placeholder" style="font-weight: 700; color: var(--secondary-color);">Desintegre</a>
+
+        <ul class="nav-list">
+            <li><a href="inicial.html" data-text="Home">Home</a></li>
+            <li><a href="servicos.html" data-text="Serviços">Serviços</a></li>
+            <li><a href="sobre.html" data-text="Sobre">Sobre</a></li>
+            <li><a href="contatos.html" data-text="Contatos">Contatos</a></li>
+            <li><a href="acompanhamento.html" data-text="Acompanhar">Acompanhar</a></li>
+        </ul>
+
+        <button id="botaoTema" aria-label="Alternar tema">
+            <img id="iconeTema" src="../icon/lua.png" alt="Ícone de tema">
+        </button>
+
+        <div class="mobile-menu">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+
+    <div class="divisor-nav"></div>
+
+    <main>
+        <section class="secao-acompanhamento">
+            <div class="acompanhamento-card">
+                <h1>Acompanhar solicitação</h1>
+                <p class="acompanhamento-subtitulo">Digite o número de protocolo que você recebeu ao enviar o
+                    formulário de coleta.</p>
+
+                <div class="busca-protocolo">
+                    <input type="text" id="inputProtocolo" placeholder="Ex: 000007 ou #000007">
+                    <button id="btnBuscarProtocolo">Buscar</button>
+                </div>
+
+                <div id="feedback-acompanhamento" class="feedback hidden"></div>
+
+                <div id="resultadoPedido" class="resultado-pedido hidden">
+
+                    <div class="status-stepper">
+                        <div class="step" data-step="recebido">
+                            <span class="step-bolha">1</span>
+                            <span class="step-label">Recebido</span>
+                        </div>
+                        <div class="step" data-step="em_andamento">
+                            <span class="step-bolha">2</span>
+                            <span class="step-label">Em andamento</span>
+                        </div>
+                        <div class="step" data-step="concluido">
+                            <span class="step-bolha">3</span>
+                            <span class="step-label">Concluído</span>
+                        </div>
+                    </div>
+
+                    <div class="pedido-info">
+                        <div class="pedido-linha"><strong>Protocolo</strong><span id="infoProtocolo">-</span></div>
+                        <div class="pedido-linha"><strong>Nome</strong><span id="infoNome">-</span></div>
+                        <div class="pedido-linha"><strong>Serviços</strong><span id="infoServicos">-</span></div>
+                        <div class="pedido-linha"><strong>Data da solicitação</strong><span id="infoData">-</span></div>
+                    </div>
+
+                    <div id="areaCertificado" class="area-certificado hidden">
+                        <p>✅ Processo concluído! Você já pode emitir o certificado de destruição.</p>
+                        <button id="btnEmitirCertificado" class="btn-enviar">Emitir certificado</button>
+                        <div id="certificadoGerado" class="certificado-gerado hidden">
+                            <p>Código do certificado:</p>
+                            <p class="codigo-certificado" id="codigoCertificado">-</p>
+                            <p class="certificado-nota">Guarde esse código — qualquer pessoa pode conferir a
+                                autenticidade dele com nosso backend em
+                                <code>GET /certificados/verificar/:codigo</code>.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>
