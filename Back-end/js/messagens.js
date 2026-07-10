@@ -5,3 +5,4 @@ document.addEventListener('DOMContentLoaded', () => {
     const mensagemInput = document.getElementById('mensagem');
 });
 
+const mensagensalva = localStorage.getItem('mensagensalva');

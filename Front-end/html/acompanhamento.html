@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/acompanhamento.css">
+    <link rel="stylesheet" href="../css/auth.css">
+    <script defer src="../js/inicial.js"></script>
+    <script defer src="../js/acompanhamento.js"></script>
+    <script defer src="../js/auth.js"></script>
+
+    <title>Acompanhamento - Desintegre Digital</title>
+</head>
+<body class="tema-escuro">
+
+    <nav>
+        <a href="inicial.html" class="logo-placeholder" style="font-weight: 700; color: var(--secondary-color);">Desintegre</a>
+
+        <ul class="nav-list">
+            <li><a href="inicial.html" data-text="Home">Home</a></li>
+            <li><a href="servicos.html" data-text="Serviços">Serviços</a></li>
+            <li><a href="sobre.html" data-text="Sobre">Sobre</a></li>
+            <li><a href="contatos.html" data-text="Contatos">Contatos</a></li>
+            <li><a href="acompanhamento.html" data-text="Acompanhar">Acompanhar</a></li>
+            <li><button id="botaoLogin" class="botao-login">Login</button></li>
+        </ul>
+
+        <button id="botaoTema" aria-label="Alternar tema">
+            <img id="iconeTema" src="../icon/lua.png" alt="Ícone de tema">
+        </button>
+
+        <div class="mobile-menu">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+
+    <div class="divisor-nav"></div>
+
+    <main>
+        <section class="secao-acompanhamento">
+            <div class="acompanhamento-card">
+                <h1>Acompanhar solicitação</h1>
+                <p class="acompanhamento-subtitulo">Digite o número de protocolo que você recebeu ao enviar o
+                    formulário de coleta.</p>
+
+                <div class="busca-protocolo">
+                    <input type="text" id="inputProtocolo" placeholder="Ex: 000007 ou #000007">
+                    <button id="btnBuscarProtocolo">Buscar</button>
+                </div>
+
+                <div id="feedback-acompanhamento" class="feedback hidden"></div>
+
+                <div id="resultadoPedido" class="resultado-pedido hidden">
+
+                    <div class="status-stepper">
+                        <div class="step" data-step="recebido">
+                            <span class="step-bolha">1</span>
+                            <span class="step-label">Recebido</span>
+                        </div>
+                        <div class="step" data-step="em_andamento">
+                            <span class="step-bolha">2</span>
+                            <span class="step-label">Em andamento</span>
+                        </div>
+                        <div class="step" data-step="concluido">
+                            <span class="step-bolha">3</span>
+                            <span class="step-label">Concluído</span>
+                        </div>
+                    </div>
+
+                    <div class="pedido-info">
+                        <div class="pedido-linha"><strong>Protocolo</strong><span id="infoProtocolo">-</span></div>
+                        <div class="pedido-linha"><strong>Nome</strong><span id="infoNome">-</span></div>
+                        <div class="pedido-linha"><strong>Serviços</strong><span id="infoServicos">-</span></div>
+                        <div class="pedido-linha"><strong>Data da solicitação</strong><span id="infoData">-</span></div>
+                    </div>
+
+                    <div id="areaCertificado" class="area-certificado hidden">
+                        <p>✅ Processo concluído! Você já pode emitir o certificado de destruição.</p>
+                        <button id="btnEmitirCertificado" class="btn-enviar">Emitir certificado</button>
+                        <div id="certificadoGerado" class="certificado-gerado hidden">
+                            <p>Código do certificado:</p>
+                            <p class="codigo-certificado" id="codigoCertificado">-</p>
+                            <p class="certificado-nota">Guarde esse código — qualquer pessoa pode conferir a
+                                autenticidade dele com nosso backend em
+                                <code>GET /certificados/verificar/:codigo</code>.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="modalAuth" class="modal-overlay">
+        <div class="modal-caixa">
+            <button type="button" id="fecharModalAuth" class="modal-fechar" aria-label="Fechar">&times;</button>
+
+            <!-- ----- PAINEL DE LOGIN ----- -->
+            <div id="painelLogin" class="modal-painel">
+                <div class="modal-titulo">
+                    <h2>Bem-vindo de volta</h2>
+                    <p>Entre com sua conta para continuar</p>
+                </div>
+
+                <div id="mensagemLogin" class="modal-mensagem"></div>
+
+                <form id="formLogin" novalidate>
+                    <div class="campo-input">
+                        <label for="loginEmail">E-mail</label>
+                        <input type="email" id="loginEmail" placeholder="seu@email.com" required>
+                    </div>
+
+                    <div class="campo-input">
+                        <label for="loginSenha">Senha</label>
+                        <input type="password" id="loginSenha" placeholder="••••••••" required>
+                    </div>
+
+                    <button type="submit" class="botao-modal-principal">Entrar</button>
+                </form>
+
+                <p class="modal-troca">
+                    Ainda não tem conta?
+                    <button type="button" id="irParaCadastro" class="botao-modal-link">Cadastre-se</button>
+                </p>
+            </div>
+
+            <!-- ----- PAINEL DE CADASTRO ----- -->
+            <div id="painelCadastro" class="modal-painel modal-painel-oculto">
+                <div class="modal-titulo">
+                    <h2>Criar conta</h2>
+                    <p>Leva menos de um minuto</p>
+                </div>
+
+                <div id="mensagemCadastro" class="modal-mensagem"></div>
+
+                <form id="formCadastro" novalidate>
+                    <div class="campo-input">
+                        <label for="cadastroNome">Nome</label>
+                        <input type="text" id="cadastroNome" placeholder="Seu nome completo" required>
+                    </div>
+
+                    <div class="campo-input">
+                        <label for="cadastroEmail">E-mail</label>
+                        <input type="email" id="cadastroEmail" placeholder="seu@email.com" required>
+                    </div>
+
+                    <div class="campo-input">
+                        <label for="cadastroSenha">Senha</label>
+                        <input type="password" id="cadastroSenha" placeholder="Mínimo 6 caracteres" required>
+                    </div>
+
+                    <div class="campo-input">
+                        <label for="cadastroConfirmarSenha">Confirmar senha</label>
+                        <input type="password" id="cadastroConfirmarSenha" placeholder="Repita a senha" required>
+                    </div>
+
+                    <button type="submit" class="botao-modal-principal">Criar conta</button>
+                </form>
+
+                <p class="modal-troca">
+                    Já tem uma conta?
+                    <button type="button" id="irParaLogin" class="botao-modal-link">Fazer login</button>
+                </p>
+            </div>
+        </div>
+    </div>
+        </section>
+    </main>
+
+</body>
+</html>

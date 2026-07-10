@@ -17,6 +17,7 @@
             <li><a href="servicos.html" data-text="Serviços">Serviços</a></li>
             <li><a href="sobre.html" data-text="Sobre">Sobre</a></li>
             <li><a href="contatos.html" data-text="Contatos">Contatos</a></li>
+            <li><a href="acompanhamento.html" data-text="Acompanhar">Acompanhar</a></li>
         </ul>
 
         <button id="botaoTema" aria-label="Alternar tema">
@@ -33,8 +34,122 @@
     <div class="divisor-nav"></div>
 
     <main>
-        <!-- Conteúdo do formulário ainda precisa ser construído. -->
+        <section class="secao-formulario">
+            <div class="formulario-card">
+                <h1>Solicitar coleta e destruição de dados</h1>
+                <p class="formulario-subtitulo">Preencha os dados abaixo. Você receberá um número de protocolo para
+                    acompanhar o processo e, ao final, o certificado de destruição.</p>
+
+                <div id="feedback-formulario" class="feedback hidden"></div>
+
+                <form id="formularioDispositivo" novalidate>
+
+                    <div class="campo">
+                        <label for="nomeid">Nome <span class="obrig">*</span></label>
+                        <input type="text" id="nomeid" name="nome" placeholder="Seu nome" required>
+                    </div>
+
+                    <div class="campo-duplo">
+                        <div class="campo">
+                            <label for="emailid">E-mail <span class="obrig">*</span></label>
+                            <input type="email" id="emailid" name="email" placeholder="seu@email.com" required>
+                        </div>
+                        <div class="campo">
+                            <label for="foneid">Telefone</label>
+                            <input type="tel" id="foneid" name="telefone" placeholder="(xx) xxxxx-xxxx">
+                        </div>
+                    </div>
+
+                    <div class="campo servicos-group">
+                        <label class="label-servicos">Serviços <span class="obrig">*</span> (escolha quantos
+                            quiser)</label>
+                        <div class="checkbox-container">
+                            <label class="opcao-checkbox">
+                                <input type="checkbox" name="servicos[]" value="Trituração e Fragmentação">
+                                Trituração e Fragmentação
+                            </label>
+                            <label class="opcao-checkbox">
+                                <input type="checkbox" name="servicos[]" value="Overwriting">
+                                Overwriting (Sobrescrita)
+                            </label>
+                            <label class="opcao-checkbox">
+                                <input type="checkbox" name="servicos[]" value="Desmagnetização">
+                                Desmagnetização
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="campo-duplo">
+                        <div class="campo">
+                            <label for="qtd_hd">Quantidade de HDs/SSDs</label>
+                            <input type="number" id="qtd_hd" name="qtd_hd" min="1" placeholder="Ex: 5">
+                        </div>
+                        <div class="campo">
+                            <label for="marcas_hd">Marcas e capacidades</label>
+                            <input type="text" id="marcas_hd" name="marcas_hd"
+                                placeholder="Ex: 2x Seagate 1TB, 1x SSD Kingston 240GB">
+                        </div>
+                    </div>
+
+                    <div class="campo entrega-group">
+                        <label>Como deseja entregar os dispositivos? <span class="obrig">*</span></label>
+                        <div class="radio-container">
+                            <label class="opcao-radio">
+                                <input type="radio" name="entrega" value="Correios" checked> Enviar pelos Correios
+                            </label>
+                            <label class="opcao-radio">
+                                <input type="radio" name="entrega" value="Física"> Retirar em uma unidade
+                            </label>
+                            <label class="opcao-radio">
+                                <input type="radio" name="entrega" value="Casa"> Buscar em minha residência
+                            </label>
+                        </div>
+
+                        <div id="enderecos-wrapper" class="campo hidden">
+                            <label for="unidade">Selecione a unidade</label>
+                            <select id="unidade" name="unidade">
+                                <option value="">-- Escolha --</option>
+                                <optgroup label="Minas Gerais">
+                                    <option value="Belo Horizonte - MG">Belo Horizonte - MG</option>
+                                    <option value="Uberlândia - MG">Uberlândia - MG</option>
+                                    <option value="Juiz de Fora - MG">Juiz de Fora - MG</option>
+                                </optgroup>
+                                <optgroup label="São Paulo">
+                                    <option value="São Paulo - SP (Centro)">São Paulo - SP (Centro)</option>
+                                    <option value="Campinas - SP">Campinas - SP</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="campo">
+                        <label for="mensagemid">Observações</label>
+                        <textarea id="mensagemid" name="mensagem" placeholder="Alguma informação extra? (opcional)"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-enviar" id="btn-enviar-formulario">
+                        <span id="btn-texto-formulario">Enviar solicitação</span>
+                        <span id="btn-loading-formulario" class="hidden">⏳ Enviando...</span>
+                    </button>
+                </form>
+            </div>
+        </section>
     </main>
+
+    <div id="modal-protocolo" class="modal-overlay hidden">
+        <div class="modal-box">
+            <div class="modal-icone">✅</div>
+            <h3>Solicitação recebida!</h3>
+            <p>Guarde o número de protocolo abaixo para acompanhar o andamento e baixar o certificado quando o
+                processo for concluído.</p>
+            <p class="protocolo-numero" id="protocolo-numero">#000000</p>
+            <a href="acompanhamento.html" class="link-acompanhamento">Acompanhar esta solicitação →</a>
+            <button onclick="fecharModalProtocolo()" class="btn-fechar-modal">Fechar</button>
+        </div>
+    </div>
+
+    <script defer src="../js/formulario.js"></script>
+
 
 </body>
 </html>
