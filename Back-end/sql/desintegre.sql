@@ -5,7 +5,10 @@
 -- o script for executado de novo. Rode o DROP manualmente (só se quiser
 -- mesmo recomeçar do zero), nunca deixe ele automático dentro do script.
 
-CREATE DATABASE IF NOT EXISTS desintegre_digital;
+DROP DATABASE IF EXISTS desintegre_digital;
+CREATE DATABASE desintegre_digital CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+
 USE desintegre_digital;
 
 -- Tabela de usuários (login / cadastro)

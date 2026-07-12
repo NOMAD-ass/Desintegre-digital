@@ -185,6 +185,28 @@
 
 .hidden { display: none !important; }
 
+.bloqueio-login {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.bloqueio-icone {
+    font-size: 2.6rem;
+    margin-bottom: 10px;
+}
+
+.bloqueio-login h1 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--color-text);
+    margin-bottom: 8px;
+}
+
+.bloqueio-login .btn-enviar {
+    max-width: 220px;
+    margin: 18px auto 0;
+}
+
 @media (max-width: 620px) {
     .acompanhamento-card { padding: 26px 20px; }
     .busca-protocolo { flex-direction: column; }

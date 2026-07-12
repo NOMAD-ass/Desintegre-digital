@@ -996,6 +996,20 @@ footer {
         width: 100%;
     }
 
+    /* O botão de Login é um <button>, não um <a>, então precisa da própria
+       regra pra também ocupar a linha toda dentro do menu mobile */
+    .nav-list li {
+        display: flex;
+        justify-content: center;
+    }
+
+    .nav-list li .botao-login {
+        width: calc(100% - 40px);
+        margin: 14px 0;
+        padding: 12px 0;
+        text-align: center;
+    }
+
     
 
     .mobile-menu.active .line1 {
