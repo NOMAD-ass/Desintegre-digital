@@ -1,5 +1,5 @@
 // Endereço do backend usado no login/cadastro. Trocar pela URL do Railway quando fizer o deploy.
-const API_URL = "http://localhost:3000/api";
+const API_URL = "https://desintegre-digital-production.up.railway.app/api";
 
 class MobileNavbar {
   constructor(mobileMenu, navList, navLinks) {

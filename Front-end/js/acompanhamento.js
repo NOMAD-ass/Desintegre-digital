@@ -1,4 +1,4 @@
-const API_BASE = "http://localhost:3000";
+const API_BASE = "https://desintegre-digital-production.up.railway.app";
 
 document.addEventListener("DOMContentLoaded", () => {
     // ===== BLOQUEIO: só continua se o usuário estiver logado =====

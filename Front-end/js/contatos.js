@@ -27,7 +27,7 @@ async function enviarContato() {
     document.getElementById('btn-enviar').disabled = true;
 
     try {
-        var resposta = await fetch('http://localhost:3000/contatos', {
+        var resposta = await fetch('https://desintegre-digital-production.up.railway.app/contatos', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ nome, email, telefone, assunto, mensagem })

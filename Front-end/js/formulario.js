@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
         esconderErro();
 
         try {
-            const resposta = await fetch("http://localhost:3000/pedidos", {
+            const resposta = await fetch("https://desintegre-digital-production.up.railway.app/pedidos", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
