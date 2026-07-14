@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
     nome VARCHAR(150) NOT NULL,
     email VARCHAR(250) NOT NULL UNIQUE,
     senha VARCHAR(255) NOT NULL,
+    is_admin TINYINT(1) NOT NULL DEFAULT 0,
     data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -58,6 +59,7 @@ CREATE TABLE IF NOT EXISTS certificados (
     pedido_id INT NOT NULL UNIQUE,
     codigo VARCHAR(40) NOT NULL UNIQUE,
     tipo_destruicao VARCHAR(255) NOT NULL,
+    arquivo_pdf VARCHAR(255) NULL,
     data_emissao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (pedido_id) REFERENCES pedidos(id) ON DELETE CASCADE
 );

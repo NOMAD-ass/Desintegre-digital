@@ -90,6 +90,13 @@
 
                     <div id="areaCertificado" class="area-certificado hidden">
                         <p>✅ Processo concluído! Você já pode emitir o certificado de destruição.</p>
+
+                        <!-- Mostrado quando a equipe já anexou o PDF oficial do certificado -->
+                        <div id="certificadoOficial" class="certificado-gerado hidden">
+                            <p>📄 O certificado oficial deste pedido já está disponível:</p>
+                            <a id="linkCertificadoOficial" class="btn-enviar" href="#" target="_blank" rel="noopener">Baixar certificado oficial (PDF)</a>
+                        </div>
+
                         <button id="btnEmitirCertificado" class="btn-enviar">Emitir certificado</button>
                         <div id="certificadoGerado" class="certificado-gerado hidden">
                             <p>Código do certificado:</p>

@@ -28,7 +28,7 @@ router.post("/cadastro", async (req, res) => {
         const novoUsuario = await Usuario.cadastrar(nome, email, senha);
 
         const token = jwt.sign(
-            { id: novoUsuario.id, email: novoUsuario.email },
+            { id: novoUsuario.id, email: novoUsuario.email, admin: novoUsuario.isAdmin },
             SEGREDO_JWT,
             { expiresIn: "2h" }
         );
@@ -36,7 +36,7 @@ router.post("/cadastro", async (req, res) => {
         res.status(201).json({
             mensagem: "Cadastro realizado com sucesso!",
             token,
-            usuario: { id: novoUsuario.id, nome: novoUsuario.nome, email: novoUsuario.email },
+            usuario: { id: novoUsuario.id, nome: novoUsuario.nome, email: novoUsuario.email, admin: novoUsuario.isAdmin },
         });
     } catch (erro) {
         console.log("Erro no cadastro:", erro);
@@ -67,7 +67,7 @@ router.post("/login", async (req, res) => {
         }
 
         const token = jwt.sign(
-            { id: usuario.id, email: usuario.email },
+            { id: usuario.id, email: usuario.email, admin: !!usuario.is_admin },
             SEGREDO_JWT,
             { expiresIn: "2h" }
         );
@@ -75,7 +75,7 @@ router.post("/login", async (req, res) => {
         res.json({
             mensagem: "Login realizado com sucesso!",
             token,
-            usuario: { id: usuario.id, nome: usuario.nome, email: usuario.email },
+            usuario: { id: usuario.id, nome: usuario.nome, email: usuario.email, admin: !!usuario.is_admin },
         });
     } catch (erro) {
         console.log("Erro no login:", erro);

@@ -158,5 +158,40 @@ Resposta (201):
 Consulta pública — qualquer pessoa com o código do certificado (ex: escaneando um QR Code no papel do certificado) pode conferir se ele é autêntico e ver os dados do pedido.
 
 ### `GET /certificados`
-Lista todos os certificados emitidos (painel administrativo).
+Lista todos os certificados emitidos (painel administrativo). **Requer login de administrador.**
+
+## Painel administrativo (envio de certificado em PDF)
+
+Novidade: agora existe uma área de admin (`Front-end/html/admin-login.html` e `admin.html`) de onde
+a equipe consegue enviar o **PDF oficial do certificado** para cada pedido concluído. Esse PDF fica
+disponível para o cliente baixar na página `acompanhamento.html`.
+
+1. **Rode a migração no banco** (se o banco já existia antes dessa versão):
+   ```
+   sql/migracao_admin_certificado.sql
+   ```
+   Isso adiciona a coluna `is_admin` em `usuarios` e `arquivo_pdf` em `certificados`.
+
+2. **Promova um usuário a administrador** (direto no banco, não existe cadastro público de admin):
+   ```sql
+   UPDATE usuarios SET is_admin = 1 WHERE email = 'seu-email-de-admin@exemplo.com';
+   ```
+   (o usuário precisa já existir — cadastre normalmente pelo site e depois rode esse UPDATE)
+
+3. **Instale a dependência nova** (`multer`, usada para receber o upload do PDF):
+   ```
+   cd Back-end
+   npm install
+   ```
+
+4. Acesse `Front-end/html/admin-login.html`, faça login com a conta promovida a admin, e no painel
+   escolha o PDF e clique em "Enviar certificado" para cada pedido concluído.
+
+### Endpoints novos de certificado
+
+- `GET /certificados/pedido/:pedidoId` — consulta pública: retorna o certificado (se existir) de um pedido, incluindo se já tem `arquivo_pdf` anexado.
+- `POST /certificados/pedido/:pedidoId/upload` — **admin only**. `multipart/form-data` com o campo `certificado` (arquivo PDF, até 10MB). Cria o certificado se ainda não existir e anexa o PDF.
+- `GET /certificados/pedido/:pedidoId/arquivo` — download público do PDF oficial anexado (é o link mostrado pro cliente na página de acompanhamento).
+
+Os PDFs enviados ficam salvos em `Back-end/uploads/certificados/` (pasta ignorada no git, exceto o `.gitkeep`).
 

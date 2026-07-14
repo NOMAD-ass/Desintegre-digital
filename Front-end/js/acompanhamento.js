@@ -106,6 +106,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (pedido.status === "concluido") {
             areaCertificado.classList.remove("hidden");
+            verificarCertificadoOficial(pedido.id);
+        }
+    }
+
+    // Confere se a equipe já anexou o PDF oficial do certificado pra esse
+    // pedido (feito pelo painel administrativo). Se sim, mostra o link de
+    // download direto em vez de depender só do PDF gerado no navegador.
+    async function verificarCertificadoOficial(pedidoId) {
+        const certificadoOficial = document.getElementById("certificadoOficial");
+        const linkCertificadoOficial = document.getElementById("linkCertificadoOficial");
+        certificadoOficial.classList.add("hidden");
+
+        try {
+            const resposta = await fetch(`${API_BASE}/certificados/pedido/${pedidoId}`);
+            if (!resposta.ok) return;
+
+            const certificado = await resposta.json();
+            if (certificado.arquivo_pdf) {
+                linkCertificadoOficial.href = `${API_BASE}/certificados/pedido/${pedidoId}/arquivo`;
+                certificadoOficial.classList.remove("hidden");
+            }
+        } catch (erro) {
+            // Se não conseguir verificar, simplesmente não mostra o link oficial
+            // (o cliente ainda pode gerar o PDF automático abaixo).
         }
     }
 

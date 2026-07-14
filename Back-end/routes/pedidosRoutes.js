@@ -1,5 +1,6 @@
 import { Router } from "express";
 import Pedido from "../classes/Pedido.js";
+import { autenticar, verificarAdmin } from "../middlewares/autenticar.js";
 
 const router = Router();
 
@@ -29,7 +30,7 @@ router.post("/", async (req, res) => {
 
 // ===== LISTAR TODOS (painel administrativo) =====
 // GET /pedidos
-router.get("/", async (req, res) => {
+router.get("/", autenticar, verificarAdmin, async (req, res) => {
     try {
         res.json(await Pedido.listarTodos());
     } catch (erro) {
@@ -53,7 +54,7 @@ router.get("/:id", async (req, res) => {
 
 // ===== ATUALIZAR STATUS (recebido / em_andamento / concluido) =====
 // PUT /pedidos/:id  { status: "concluido" }
-router.put("/:id", async (req, res) => {
+router.put("/:id", autenticar, verificarAdmin, async (req, res) => {
     try {
         const { status } = req.body;
         const statusValidos = ["recebido", "em_andamento", "concluido"];
@@ -75,7 +76,7 @@ router.put("/:id", async (req, res) => {
 
 // ===== EXCLUIR =====
 // DELETE /pedidos/:id
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", autenticar, verificarAdmin, async (req, res) => {
     try {
         const excluido = await Pedido.deletar(req.params.id);
         if (!excluido) return res.status(404).json({ erro: "Pedido não encontrado." });
