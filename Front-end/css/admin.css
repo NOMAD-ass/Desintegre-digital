@@ -237,6 +237,31 @@
 
 .admin-pedido-acoes {
     display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.admin-status-controle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.admin-select-status {
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: 1.5px solid var(--border-color);
+    background: var(--bg-main);
+    color: var(--color-text);
+    font-family: var(--font-family);
+    font-size: 0.85rem;
+}
+
+.admin-area-certificado {
+    display: flex;
     align-items: center;
     gap: 10px;
     flex-wrap: wrap;

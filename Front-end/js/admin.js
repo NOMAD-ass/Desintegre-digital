@@ -99,18 +99,61 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div class="admin-pedido-detalhe">${escaparHtml(pedido.email)}</div>
                     <span class="admin-status-badge ${pedido.status}">${rotulosStatus[pedido.status] || pedido.status}</span>
                 </div>
-                <div class="admin-pedido-acoes" data-pedido-id="${pedido.id}"></div>
+                <div class="admin-pedido-acoes" data-pedido-id="${pedido.id}">
+                    <div class="admin-status-controle">
+                        <select class="admin-select-status" data-pedido="${pedido.id}">
+                            <option value="recebido" ${pedido.status === "recebido" ? "selected" : ""}>Recebido</option>
+                            <option value="em_andamento" ${pedido.status === "em_andamento" ? "selected" : ""}>Em andamento</option>
+                            <option value="concluido" ${pedido.status === "concluido" ? "selected" : ""}>Concluído</option>
+                        </select>
+                        <button class="admin-botao-secundario admin-botao-status" data-pedido="${pedido.id}">Salvar status</button>
+                    </div>
+                    <div class="admin-area-certificado"></div>
+                </div>
             `;
 
-            const areaAcoes = card.querySelector(".admin-pedido-acoes");
+            const areaCertificado = card.querySelector(".admin-area-certificado");
 
             if (pedido.status === "concluido") {
-                await montarAreaCertificado(areaAcoes, pedido);
+                await montarAreaCertificado(areaCertificado, pedido);
             } else {
-                areaAcoes.innerHTML = `<span class="admin-pedido-detalhe">Aguardando conclusão do pedido para anexar certificado.</span>`;
+                areaCertificado.innerHTML = `<span class="admin-pedido-detalhe">Aguardando conclusão do pedido para anexar certificado.</span>`;
             }
 
+            const botaoStatus = card.querySelector(".admin-botao-status");
+            const selectStatus = card.querySelector(".admin-select-status");
+            botaoStatus.addEventListener("click", () => atualizarStatusPedido(pedido.id, selectStatus, botaoStatus));
+
             listaPedidos.appendChild(card);
+        }
+    }
+
+    async function atualizarStatusPedido(pedidoId, selectStatus, botao) {
+        const novoStatus = selectStatus.value;
+        esconderMensagem();
+        botao.disabled = true;
+        const textoOriginal = botao.textContent;
+        botao.textContent = "Salvando...";
+
+        try {
+            const resposta = await chamarApi(`/pedidos/${pedidoId}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ status: novoStatus }),
+            });
+            const dados = await resposta.json();
+
+            if (!resposta.ok) {
+                return mostrarMensagem(dados.erro || "Não foi possível atualizar o status.", "erro");
+            }
+
+            mostrarMensagem(`Status do pedido #${String(pedidoId).padStart(6, "0")} atualizado com sucesso!`, "sucesso");
+            await carregarPedidos();
+        } catch (erro) {
+            mostrarMensagem("Não foi possível conectar ao servidor.", "erro");
+        } finally {
+            botao.disabled = false;
+            botao.textContent = textoOriginal;
         }
     }
 

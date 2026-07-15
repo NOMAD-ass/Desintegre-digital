@@ -31,6 +31,7 @@ export function verificarAdmin(req, res, next) {
     next();
 }
 
+
 // Igual ao "autenticar", mas não bloqueia a requisição se não vier token
 // (ou se o token for inválido) - só popula req.usuario quando dá certo.
 // Usada no envio do formulário de solicitação: se o cliente estiver
@@ -55,3 +56,5 @@ export function autenticarOpcional(req, res, next) {
 
     next();
 }
+
+
