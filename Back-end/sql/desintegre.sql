@@ -72,3 +72,13 @@ CREATE TABLE IF NOT EXISTS certificados (
 -- Body (JSON): { "nome": "Teste", "email": "teste@email.com", "senha": "123456" }
 --
 -- Isso garante que a senha salva no banco já nasce no formato certo.
+
+
+ALTER TABLE usuarios
+    ADD COLUMN IF NOT EXISTS is_admin TINYINT(1) NOT NULL DEFAULT 0;
+
+ALTER TABLE certificados
+    ADD COLUMN IF NOT EXISTS arquivo_pdf VARCHAR(255) NULL;
+
+
+DESCRIBE usuarios;    
