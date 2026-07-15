@@ -1,10 +1,6 @@
 import { Router } from "express";
 import Pedido from "../classes/Pedido.js";
-<<<<<<< HEAD
 import { autenticar, verificarAdmin, autenticarOpcional } from "../middlewares/autenticar.js";
-=======
-import { autenticar, verificarAdmin } from "../middlewares/autenticar.js";
->>>>>>> c3d9e8504b97d991252031661b4e720daa350fd0
 
 const router = Router();
 
