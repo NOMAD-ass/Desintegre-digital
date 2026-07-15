@@ -54,13 +54,10 @@
                 <!-- Conteúdo real da página, só aparece se estiver logado -->
                 <div id="conteudoAcompanhamento" class="hidden">
                     <h1>Acompanhar solicitação</h1>
-                    <p class="acompanhamento-subtitulo">Digite o número de protocolo que você recebeu ao enviar o
-                        formulário de coleta.</p>
+                    <p class="acompanhamento-subtitulo">Estes são os pedidos vinculados à sua conta. Clique em um
+                        deles para ver os detalhes.</p>
 
-                    <div class="busca-protocolo">
-                        <input type="text" id="inputProtocolo" placeholder="Ex: 000007 ou #000007">
-                        <button id="btnBuscarProtocolo">Buscar</button>
-                    </div>
+                    <div id="listaMeusPedidos" class="lista-meus-pedidos"></div>
 
                 <div id="feedback-acompanhamento" class="feedback hidden"></div>
 
@@ -90,6 +87,13 @@
 
                     <div id="areaCertificado" class="area-certificado hidden">
                         <p>✅ Processo concluído! Você já pode emitir o certificado de destruição.</p>
+
+                        <!-- Mostrado quando a equipe já anexou o PDF oficial do certificado -->
+                        <div id="certificadoOficial" class="certificado-gerado hidden">
+                            <p>📄 O certificado oficial deste pedido já está disponível:</p>
+                            <a id="linkCertificadoOficial" class="btn-enviar" href="#" target="_blank" rel="noopener">Baixar certificado oficial (PDF)</a>
+                        </div>
+
                         <button id="btnEmitirCertificado" class="btn-enviar">Emitir certificado</button>
                         <div id="certificadoGerado" class="certificado-gerado hidden">
                             <p>Código do certificado:</p>
@@ -121,13 +125,20 @@
 
                 <form id="formLogin" novalidate>
                     <div class="campo-input">
-                        <label for="loginEmail">E-mail</label>
+                        <label for="loginEmail" id="labelLoginEmail">E-mail</label>
                         <input type="email" id="loginEmail" placeholder="seu@email.com" required>
                     </div>
 
                     <div class="campo-input">
                         <label for="loginSenha">Senha</label>
                         <input type="password" id="loginSenha" placeholder="••••••••" required>
+                    </div>
+
+                    <div class="campo-checkbox">
+                        <label for="loginComoAdmin">
+                            <input type="checkbox" id="loginComoAdmin">
+                            Entrar como administrador
+                        </label>
                     </div>
 
                     <button type="submit" class="botao-modal-principal">Entrar</button>

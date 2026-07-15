@@ -1,11 +1,14 @@
 import { Router } from "express";
 import Pedido from "../classes/Pedido.js";
+import { autenticar, verificarAdmin, autenticarOpcional } from "../middlewares/autenticar.js";
 
 const router = Router();
 
 // ===== CRIAR (usado pelo formulario.html) =====
 // POST /pedidos
-router.post("/", async (req, res) => {
+// Se o cliente estiver logado (token enviado), o pedido já é vinculado à
+// conta dele - autenticarOpcional não bloqueia quem envia sem estar logado.
+router.post("/", autenticarOpcional, async (req, res) => {
     try {
         const { nome, email, telefone, mensagem, qtd_hd, marcas_hd, entrega_metodo, entrega_unidade, servicos_selecionados } = req.body;
 
@@ -16,8 +19,13 @@ router.post("/", async (req, res) => {
             return res.status(400).json({ erro: "Selecione ao menos um serviço." });
         }
 
+        // O login fixo de administrador (id 0) não é um usuário real do
+        // banco, então nunca vinculamos um pedido a ele.
+        const usuarioId = req.usuario && req.usuario.id ? req.usuario.id : null;
+
         const novoPedido = await Pedido.criar({
             nome, email, telefone, mensagem, qtd_hd, marcas_hd, entrega_metodo, entrega_unidade, servicos_selecionados,
+            usuario_id: usuarioId,
         });
 
         res.status(201).json({ mensagem: "Solicitação registrada com sucesso!", dados: novoPedido });
@@ -27,9 +35,24 @@ router.post("/", async (req, res) => {
     }
 });
 
+// ===== LISTAR OS PEDIDOS DO USUÁRIO LOGADO (página de acompanhamento) =====
+// GET /pedidos/usuario/meus
+// Substitui o antigo fluxo de digitar o número do protocolo: agora o
+// acesso ao acompanhamento é feito pelo login, e cada pessoa só vê os
+// próprios pedidos.
+router.get("/usuario/meus", autenticar, async (req, res) => {
+    try {
+        const pedidos = await Pedido.listarPorUsuario(req.usuario.id);
+        res.json(pedidos);
+    } catch (erro) {
+        console.log("Erro ao listar pedidos do usuário:", erro);
+        res.status(500).json({ erro: "Erro interno ao buscar seus pedidos." });
+    }
+});
+
 // ===== LISTAR TODOS (painel administrativo) =====
 // GET /pedidos
-router.get("/", async (req, res) => {
+router.get("/", autenticar, verificarAdmin, async (req, res) => {
     try {
         res.json(await Pedido.listarTodos());
     } catch (erro) {
@@ -53,7 +76,7 @@ router.get("/:id", async (req, res) => {
 
 // ===== ATUALIZAR STATUS (recebido / em_andamento / concluido) =====
 // PUT /pedidos/:id  { status: "concluido" }
-router.put("/:id", async (req, res) => {
+router.put("/:id", autenticar, verificarAdmin, async (req, res) => {
     try {
         const { status } = req.body;
         const statusValidos = ["recebido", "em_andamento", "concluido"];
@@ -75,7 +98,7 @@ router.put("/:id", async (req, res) => {
 
 // ===== EXCLUIR =====
 // DELETE /pedidos/:id
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", autenticar, verificarAdmin, async (req, res) => {
     try {
         const excluido = await Pedido.deletar(req.params.id);
         if (!excluido) return res.status(404).json({ erro: "Pedido não encontrado." });

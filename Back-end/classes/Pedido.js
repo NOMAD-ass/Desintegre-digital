@@ -35,6 +35,14 @@ class Pedido {
         return resultado[0] || null;
     }
 
+    // Lista os pedidos vinculados a um usuário logado (usado na página de
+    // acompanhamento, que agora mostra os pedidos automaticamente pelo
+    // login em vez de exigir o número do protocolo).
+    static async listarPorUsuario(usuarioId) {
+        const query = `SELECT * FROM pedidos WHERE usuario_id = ? ORDER BY data_criacao DESC`;
+        return executarQuery(query, [usuarioId]);
+    }
+
     // Atualiza o status do processo (recebido -> em_andamento -> concluido)
     static async atualizarStatus(id, status) {
         const query = `UPDATE pedidos SET status = ? WHERE id = ?`;

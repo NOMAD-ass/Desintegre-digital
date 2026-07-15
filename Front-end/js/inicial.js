@@ -79,6 +79,27 @@ function inicializarAuth() {
     const mensagemLogin = document.getElementById("mensagemLogin");
     const mensagemCadastro = document.getElementById("mensagemCadastro");
 
+    // ----- Opção "Entrar como administrador" -----
+    const loginComoAdmin = document.getElementById("loginComoAdmin");
+    const loginEmailInput = document.getElementById("loginEmail");
+    const labelLoginEmail = document.getElementById("labelLoginEmail");
+
+    if (loginComoAdmin && loginEmailInput && labelLoginEmail) {
+        loginComoAdmin.addEventListener("change", () => {
+            if (loginComoAdmin.checked) {
+                // Login fixo: usuário e senha "admin" - por isso o campo
+                // deixa de exigir formato de e-mail.
+                loginEmailInput.type = "text";
+                loginEmailInput.placeholder = "admin";
+                labelLoginEmail.textContent = "Usuário";
+            } else {
+                loginEmailInput.type = "email";
+                loginEmailInput.placeholder = "seu@email.com";
+                labelLoginEmail.textContent = "E-mail";
+            }
+        });
+    }
+
     if (!modal || !botaoLogin) return; // Página sem modal de login, não faz nada
 
     // ----- ABRIR / FECHAR MODAL -----
@@ -198,6 +219,24 @@ function inicializarAuth() {
 
             if (!resposta.ok) {
                 mostrarMensagem(mensagemLogin, "erro", dados.erro || "Não foi possível entrar.");
+                return;
+            }
+
+            // Login administrativo: manda direto pro painel /admin em vez
+            // de só fechar o modal.
+            if (loginComoAdmin && loginComoAdmin.checked) {
+                if (!dados.usuario.admin) {
+                    mostrarMensagem(mensagemLogin, "erro", "Usuário ou senha administrativa incorretos.");
+                    return;
+                }
+
+                localStorage.setItem("admin_token", dados.token);
+                localStorage.setItem("admin_usuario", JSON.stringify(dados.usuario));
+
+                mostrarMensagem(mensagemLogin, "sucesso", "Login administrativo realizado! Redirecionando...");
+                setTimeout(() => {
+                    window.location.href = "admin.html";
+                }, 800);
                 return;
             }
 

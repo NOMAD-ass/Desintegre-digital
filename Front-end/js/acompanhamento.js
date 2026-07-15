@@ -37,8 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
     conteudoAcompanhamento.classList.remove("hidden");
 
     // ===== PÁGINA NORMAL (usuário já logado) =====
-    const input = document.getElementById("inputProtocolo");
-    const botaoBuscar = document.getElementById("btnBuscarProtocolo");
+    const listaMeusPedidos = document.getElementById("listaMeusPedidos");
     const feedback = document.getElementById("feedback-acompanhamento");
     const resultado = document.getElementById("resultadoPedido");
     const areaCertificado = document.getElementById("areaCertificado");
@@ -49,32 +48,74 @@ document.addEventListener("DOMContentLoaded", () => {
     let pedidoAtualId = null;
     let pedidoAtualDados = null;
 
-    botaoBuscar.addEventListener("click", buscarPedido);
-    input.addEventListener("keyup", (e) => {
-        if (e.key === "Enter") buscarPedido();
-    });
+    const rotulosStatus = {
+        recebido: "Recebido",
+        em_andamento: "Em andamento",
+        concluido: "Concluído",
+    };
 
-    async function buscarPedido() {
-        const protocolo = input.value.trim().replace("#", "").replace(/^0+/, "");
-        if (!protocolo) return mostrarErro("Digite o número do protocolo.");
+    carregarMeusPedidos();
 
+    // Busca, direto pelo login, todos os pedidos vinculados à conta do
+    // usuário - não é mais preciso digitar nenhum número de protocolo.
+    async function carregarMeusPedidos() {
         esconderErro();
-        resultado.classList.add("hidden");
-        areaCertificado.classList.add("hidden");
-        certificadoGerado.classList.add("hidden");
+        listaMeusPedidos.innerHTML = "";
+
+        const token = localStorage.getItem("token");
+        if (!token) {
+            return mostrarErro("Sessão inválida. Faça login novamente.");
+        }
 
         try {
-            const resposta = await fetch(`${API_BASE}/pedidos/${protocolo}`);
+            const resposta = await fetch(`${API_BASE}/pedidos/usuario/meus`, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
             const dados = await resposta.json();
 
             if (!resposta.ok) {
-                return mostrarErro(dados.erro || "Protocolo não encontrado.");
+                return mostrarErro(dados.erro || "Não foi possível carregar seus pedidos.");
             }
 
-            preencherResultado(dados);
+            renderizarListaPedidos(dados);
         } catch (erro) {
             mostrarErro("Não foi possível conectar ao servidor. Verifique se o backend está rodando.");
         }
+    }
+
+    function renderizarListaPedidos(pedidos) {
+        listaMeusPedidos.innerHTML = "";
+
+        if (!pedidos || pedidos.length === 0) {
+            const vazio = document.createElement("p");
+            vazio.className = "lista-meus-pedidos-vazio";
+            vazio.textContent = "Você ainda não tem nenhuma solicitação vinculada a essa conta.";
+            listaMeusPedidos.appendChild(vazio);
+            return;
+        }
+
+        pedidos.forEach((pedido) => {
+            const item = document.createElement("button");
+            item.type = "button";
+            item.className = "item-meu-pedido";
+            item.dataset.id = pedido.id;
+            item.innerHTML = `
+                <span class="item-protocolo">#${String(pedido.id).padStart(6, "0")} · ${pedido.nome}</span>
+                <span class="item-status">${rotulosStatus[pedido.status] || pedido.status}</span>
+            `;
+            item.addEventListener("click", () => {
+                document.querySelectorAll(".item-meu-pedido").forEach((el) => el.classList.remove("selecionado"));
+                item.classList.add("selecionado");
+
+                esconderErro();
+                resultado.classList.add("hidden");
+                areaCertificado.classList.add("hidden");
+                certificadoGerado.classList.add("hidden");
+
+                preencherResultado(pedido);
+            });
+            listaMeusPedidos.appendChild(item);
+        });
     }
 
     function preencherResultado(pedido) {
@@ -106,6 +147,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (pedido.status === "concluido") {
             areaCertificado.classList.remove("hidden");
+            verificarCertificadoOficial(pedido.id);
+        }
+    }
+
+    // Confere se a equipe já anexou o PDF oficial do certificado pra esse
+    // pedido (feito pelo painel administrativo). Se sim, mostra o link de
+    // download direto em vez de depender só do PDF gerado no navegador.
+    async function verificarCertificadoOficial(pedidoId) {
+        const certificadoOficial = document.getElementById("certificadoOficial");
+        const linkCertificadoOficial = document.getElementById("linkCertificadoOficial");
+        certificadoOficial.classList.add("hidden");
+
+        try {
+            const resposta = await fetch(`${API_BASE}/certificados/pedido/${pedidoId}`);
+            if (!resposta.ok) return;
+
+            const certificado = await resposta.json();
+            if (certificado.arquivo_pdf) {
+                linkCertificadoOficial.href = `${API_BASE}/certificados/pedido/${pedidoId}/arquivo`;
+                certificadoOficial.classList.remove("hidden");
+            }
+        } catch (erro) {
+            // Se não conseguir verificar, simplesmente não mostra o link oficial
+            // (o cliente ainda pode gerar o PDF automático abaixo).
         }
     }
 

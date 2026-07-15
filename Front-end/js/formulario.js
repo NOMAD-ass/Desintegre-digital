@@ -44,9 +44,16 @@ document.addEventListener("DOMContentLoaded", () => {
         esconderErro();
 
         try {
+            // Se o cliente estiver logado, o pedido é enviado já vinculado
+            // à conta dele - assim ele aparece sozinho na página de
+            // acompanhamento, sem precisar do número do protocolo.
+            const token = localStorage.getItem("token");
+            const cabecalhos = { "Content-Type": "application/json" };
+            if (token) cabecalhos["Authorization"] = `Bearer ${token}`;
+
             const resposta = await fetch("https://desintegre-digital-production.up.railway.app/pedidos", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: cabecalhos,
                 body: JSON.stringify({
                     nome,
                     email,

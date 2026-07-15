@@ -115,6 +115,26 @@
     border-color: var(--secondary-color);
 }
 
+.modal-caixa .campo-checkbox {
+    margin-bottom: 16px;
+    text-align: left;
+}
+
+.modal-caixa .campo-checkbox label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--color-text);
+    opacity: 0.85;
+    cursor: pointer;
+}
+
+.modal-caixa .campo-checkbox input {
+    width: auto;
+    cursor: pointer;
+}
+
 .botao-modal-principal {
     width: 100%;
     padding: 13px;

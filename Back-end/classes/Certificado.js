@@ -37,6 +37,33 @@ class Certificado {
         return Certificado.buscarPorId(resultado.insertId);
     }
 
+    // Usado pelo painel administrativo: anexa o PDF oficial do certificado
+    // a um pedido concluído. Se ainda não existir um certificado pra esse
+    // pedido, gera um (mesma regra do método "gerar") antes de anexar.
+    static async anexarPdf(pedidoId, nomeArquivo) {
+        const pedido = await Pedido.buscarPorId(pedidoId);
+        if (!pedido) {
+            const erro = new Error("Pedido não encontrado.");
+            erro.status = 404;
+            throw erro;
+        }
+        if (pedido.status !== "concluido") {
+            const erro = new Error("Só é possível anexar o certificado quando o pedido estiver concluído.");
+            erro.status = 400;
+            throw erro;
+        }
+
+        let certificado = await Certificado.buscarPorPedido(pedidoId);
+        if (!certificado) {
+            certificado = await Certificado.gerar(pedidoId);
+        }
+
+        const query = `UPDATE certificados SET arquivo_pdf = ? WHERE id = ?`;
+        await executarQuery(query, [nomeArquivo, certificado.id]);
+
+        return Certificado.buscarPorId(certificado.id);
+    }
+
     static async buscarPorId(id) {
         const query = `SELECT * FROM certificados WHERE id = ?`;
         const resultado = await executarQuery(query, [id]);
