@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/metodos.css">
+    <link rel="stylesheet" href="../css/auth.css">
+    <script defer src="../js/inicial.js"></script>
+    <title>Overwriting (Sobrescrita) - Desintegre Digital</title>
+</head>
+
+<body class="tema-escuro">
+
+    <nav>
+        <a href="inicial.html" class="logo-placeholder" style="font-weight: 700; color: var(--secondary-color);">Desintegre</a>
+
+        <ul class="nav-list">
+            <li><a href="inicial.html" data-text="Home">Home</a></li>
+            <li><a href="servicos.html" data-text="Serviços" class="active">Serviços</a></li>
+            <li><a href="sobre.html" data-text="Sobre">Sobre</a></li>
+            <li><a href="contatos.html" data-text="Contatos">Contatos</a></li>
+            <li><a href="acompanhamento.html" data-text="Acompanhar">Acompanhar</a></li>
+            <li><button id="botaoLogin" class="botao-login">Login</button></li>
+        </ul>
+
+        <button id="botaoTema" aria-label="Alternar tema">
+            <img id="iconeTema" src="../icon/lua.png" alt="Ícone de tema">
+        </button>
+
+        <div class="mobile-menu">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+
+    <div class="divisor-nav"></div>
+
+    <main class="conteudo-metodo">
+
+        <section class="metodo-hero" style="background-image: linear-gradient(to bottom, rgba(4, 21, 49, 0.85) 0%, rgba(4, 21, 49, 0.75) 100%), url('../img/card-servico2.png');">
+            <div class="metodo-hero-titulo">
+                <span>Destruição Lógica</span>
+                <h1>Overwriting (Sobrescrita)</h1>
+                <p>Os dados são sobrescritos diversas vezes com padrões binários, sem danificar o hardware.</p>
+            </div>
+        </section>
+
+        <section class="metodo-intro">
+            <div class="container-metodo">
+                <p>O overwriting (sobrescrita) é um método de destruição lógica indicado para dispositivos que ainda serão reaproveitados, doados ou revendidos. Todo o conteúdo do HD ou SSD é sobrescrito diversas vezes com padrões de dados (zeros, uns e sequências aleatórias), seguindo protocolos reconhecidos internacionalmente, como o NIST 800-88. Ao final, os dados originais não podem mais ser recuperados por nenhum software de recuperação, mesmo os mais avançados - mas o dispositivo continua funcionando normalmente.</p>
+            </div>
+        </section>
+
+        <section class="metodo-etapas">
+            <div class="container-metodo">
+                <h2>Como funciona</h2>
+                <div class="lista-etapas">
+                    <div class="etapa-item">
+                        <div class="etapa-numero">1</div>
+                        <div class="etapa-texto">
+                            <h3>Diagnóstico do dispositivo</h3>
+                            <p>Verificamos o tipo de mídia (HD, SSD ou híbrido) para escolher o algoritmo de sobrescrita mais adequado.</p>
+                        </div>
+                    </div>
+                    <div class="etapa-item">
+                        <div class="etapa-numero">2</div>
+                        <div class="etapa-texto">
+                            <h3>Sobrescrita em múltiplas passadas</h3>
+                            <p>O software grava padrões de dados sobre 100% dos setores do disco, em várias passadas sucessivas.</p>
+                        </div>
+                    </div>
+                    <div class="etapa-item">
+                        <div class="etapa-numero">3</div>
+                        <div class="etapa-texto">
+                            <h3>Verificação de integridade</h3>
+                            <p>Uma amostragem dos setores é lida de volta para confirmar que a sobrescrita foi concluída com sucesso.</p>
+                        </div>
+                    </div>
+                    <div class="etapa-item">
+                        <div class="etapa-numero">4</div>
+                        <div class="etapa-texto">
+                            <h3>Emissão do certificado</h3>
+                            <p>É gerado um relatório com o padrão utilizado, número de passadas e a confirmação de conclusão.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="metodo-seguranca">
+            <div class="container-metodo">
+                <h2>Por que é seguro</h2>
+                <div class="grade-seguranca">
+                    <div class="card-seguranca">
+                        <div class="icone-seguranca">🔒</div>
+                        <h3>Padrão internacional</h3>
+                        <p>Seguimos diretrizes como o NIST 800-88, referência mundial em sanitização de dados.</p>
+                    </div>
+                    <div class="card-seguranca">
+                        <div class="icone-seguranca">💾</div>
+                        <h3>Preserva o hardware</h3>
+                        <p>O dispositivo sai funcional, pronto para reuso, doação ou revenda.</p>
+                    </div>
+                    <div class="card-seguranca">
+                        <div class="icone-seguranca">✅</div>
+                        <h3>Verificação real</h3>
+                        <p>Não confiamos só no processo - conferimos amostras dos setores após a sobrescrita.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="metodo-cta">
+            <div class="container-metodo">
+                <h2>Precisa deste serviço?</h2>
+                <p>Solicite a coleta e receba um certificado de destruição ao final do processo.</p>
+                <a href="formulario.html" class="botao-veja-todos">Solicitar Agora</a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="rodape-container">
+            <p>&copy; 2026 Desintegre Digital. Todos os direitos reservados.</p>
+            <div class="rodape-links">
+                <a href="inicial.html">Home</a>
+                <a href="servicos.html">Serviços</a>
+                <a href="sobre.html">Sobre</a>
+                <a href="contatos.html">Contato</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============ MODAL DE LOGIN / CADASTRO ============ -->
+    <div id="modalAuth" class="modal-overlay">
+        <div class="modal-caixa">
+            <button type="button" id="fecharModalAuth" class="modal-fechar" aria-label="Fechar">&times;</button>
+
+            <div id="painelLogin" class="modal-painel">
+                <div class="modal-titulo">
+                    <h2>Bem-vindo de volta</h2>
+                    <p>Entre com sua conta para continuar</p>
+                </div>
+
+                <div id="mensagemLogin" class="modal-mensagem"></div>
+
+                <form id="formLogin" novalidate>
+                    <div class="campo-input">
+                        <label for="loginEmail">E-mail</label>
+                        <input type="email" id="loginEmail" placeholder="seu@email.com" required>
+                    </div>
+
+                    <div class="campo-input">
+                        <label for="loginSenha">Senha</label>
+                        <input type="password" id="loginSenha" placeholder="••••••••" required>
+                    </div>
+
+                    <button type="submit" class="botao-modal-principal">Entrar</button>
+                </form>
+
+                <p class="modal-troca">
+                    Ainda não tem conta?
+                    <button type="button" id="irParaCadastro" class="botao-modal-link">Cadastre-se</button>
+                </p>
+            </div>
+
+            <div id="painelCadastro" class="modal-painel modal-painel-oculto">
+                <div class="modal-titulo">
+                    <h2>Criar conta</h2>
+                    <p>Leva menos de um minuto</p>
+                </div>
+
+                <div id="mensagemCadastro" class="modal-mensagem"></div>
+
+                <form id="formCadastro" novalidate>
+                    <div class="campo-input">
+                        <label for="cadastroNome">Nome</label>
+                        <input type="text" id="cadastroNome" placeholder="Seu nome completo" required>
+                    </div>
+
+                    <div class="campo-input">
+                        <label for="cadastroEmail">E-mail</label>
+                        <input type="email" id="cadastroEmail" placeholder="seu@email.com" required>
+                    </div>
+
+                    <div class="campo-input">
+                        <label for="cadastroSenha">Senha</label>
+                        <input type="password" id="cadastroSenha" placeholder="Mínimo 6 caracteres" required>
+                    </div>
+
+                    <div class="campo-input">
+                        <label for="cadastroConfirmarSenha">Confirmar senha</label>
+                        <input type="password" id="cadastroConfirmarSenha" placeholder="Repita a senha" required>
+                    </div>
+
+                    <button type="submit" class="botao-modal-principal">Criar conta</button>
+                </form>
+
+                <p class="modal-troca">
+                    Já tem uma conta?
+                    <button type="button" id="irParaLogin" class="botao-modal-link">Fazer login</button>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

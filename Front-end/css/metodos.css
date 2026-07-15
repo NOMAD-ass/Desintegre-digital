@@ -1,0 +1,224 @@
+@import "./inicial.css";
+
+/* =======================================
+   PÁGINAS DE MÉTODO DE DESTRUIÇÃO
+   (trituracao.html, overwriting.html, desmagnetizacao.html)
+   As três páginas usam este mesmo arquivo - só o texto/imagem muda
+   de uma pra outra, a estrutura e o visual são idênticos.
+   ======================================= */
+
+.conteudo-metodo {
+    display: block;
+    width: 100%;
+}
+
+.container-metodo {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 10%;
+}
+
+/* Banner do topo - mesmo padrão do "sobre-hero", com imagem de fundo + título */
+.metodo-hero {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 32vh;
+    margin-top: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+    position: relative;
+}
+
+.metodo-hero-titulo {
+    position: relative;
+    z-index: 1;
+    padding: 0 20px;
+}
+
+.metodo-hero-titulo span {
+    display: inline-block;
+    color: var(--secondary-color);
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.metodo-hero-titulo h1 {
+    font-size: 2.6rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.metodo-hero-titulo p {
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: #e6e6e6;
+    max-width: 560px;
+    margin: 0 auto;
+}
+
+/* Seção "O que é" */
+.metodo-intro {
+    padding: 60px 0 20px;
+}
+
+.metodo-intro p {
+    color: var(--color-text);
+    font-size: 1.02rem;
+    line-height: 1.7;
+    opacity: 0.85;
+}
+
+/* Seção "Como funciona" - lista de etapas numeradas */
+.metodo-etapas {
+    padding: 40px 0;
+}
+
+.metodo-etapas h2 {
+    color: var(--color-text);
+    font-size: 1.7rem;
+    font-weight: 800;
+    margin-bottom: 30px;
+}
+
+.lista-etapas {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.etapa-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 22px 26px;
+}
+
+.etapa-numero {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--secondary-color), var(--quaternary-color));
+    color: #ffffff;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.etapa-texto h3 {
+    color: var(--color-text);
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.etapa-texto p {
+    color: var(--color-text);
+    opacity: 0.75;
+    font-size: 0.92rem;
+    line-height: 1.55;
+}
+
+/* Seção "Por que é seguro" - cards em grade */
+.metodo-seguranca {
+    padding: 40px 0;
+}
+
+.metodo-seguranca h2 {
+    color: var(--color-text);
+    font-size: 1.7rem;
+    font-weight: 800;
+    margin-bottom: 30px;
+}
+
+.grade-seguranca {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.card-seguranca {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 24px;
+}
+
+.card-seguranca .icone-seguranca {
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+}
+
+.card-seguranca h3 {
+    color: var(--color-text);
+    font-size: 0.98rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.card-seguranca p {
+    color: var(--color-text);
+    opacity: 0.75;
+    font-size: 0.88rem;
+    line-height: 1.5;
+}
+
+/* CTA final */
+.metodo-cta {
+    margin: 50px 0 70px;
+    padding: 40px;
+    text-align: center;
+    background: linear-gradient(135deg, var(--secondary-color), var(--quaternary-color));
+    border-radius: var(--border-radius);
+}
+
+.metodo-cta h2 {
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.metodo-cta p {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 22px;
+}
+
+.metodo-cta .botao-veja-todos {
+    background-color: #ffffff;
+    color: var(--secondary-color);
+}
+
+@media (max-width: 720px) {
+    .container-metodo {
+        padding: 0 6%;
+    }
+
+    .metodo-hero {
+        height: 34vh;
+    }
+
+    .metodo-hero-titulo h1 {
+        font-size: 1.9rem;
+    }
+
+    .grade-seguranca {
+        grid-template-columns: 1fr;
+    }
+
+    .etapa-item {
+        flex-direction: column;
+    }
+}

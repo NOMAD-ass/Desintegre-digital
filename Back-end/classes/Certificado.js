@@ -25,7 +25,15 @@ class Certificado {
         const sufixo = crypto.randomBytes(4).toString("hex").toUpperCase();
         const codigo = `DD-${ano}-${String(pedido.id).padStart(5, "0")}-${sufixo}`;
 
-        const servicos = JSON.parse(pedido.servicos_selecionados || "[]");
+        let servicos;
+        try {
+            servicos = JSON.parse(pedido.servicos_selecionados || "[]");
+            if (!Array.isArray(servicos)) servicos = [String(servicos)];
+        } catch (erroParse) {
+            // Dado antigo/malformado no banco (não é um JSON válido) - usa o texto cru
+            // como está, em vez de derrubar a emissão do certificado.
+            servicos = pedido.servicos_selecionados ? [String(pedido.servicos_selecionados)] : [];
+        }
         const tipoDestruicao = servicos.join(", ") || "Não especificado";
 
         const query = `

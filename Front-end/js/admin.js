@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("botaoSairAdmin").addEventListener("click", () => {
         localStorage.removeItem("admin_token");
         localStorage.removeItem("admin_usuario");
-        window.location.href = "admin-login.html";
+        window.location.href = "inicial.html";
     });
 
     const listaPedidos = document.getElementById("listaPedidos");
