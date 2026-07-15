@@ -33,9 +33,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const mobileNavbar = new MobileNavbar(".mobile-menu", ".nav-list", ".nav-list li");
   mobileNavbar.init();
 
-  // Lógica do botão de tema alternando suas imagens originais
+  // Lógica do botão de tema alternando suas imagens originais e logos correspondentes
   const botao = document.querySelector('#botaoTema');
   const icone = document.querySelector('#iconeTema');
+  const logo = document.querySelector('.logo-img'); // <--- Seleciona a imagem da sua logo
 
   if (botao && icone) {
     botao.addEventListener('click', () => {
@@ -46,13 +47,25 @@ document.addEventListener("DOMContentLoaded", () => {
       }, 500);
 
       if (document.body.classList.contains('tema-claro')) {
+        // MUDANDO PARA O TEMA ESCURO
         document.body.classList.remove('tema-claro');
         document.body.classList.add('tema-escuro');
         icone.src = "../icon/lua.png";
+        
+        // Se a logo existir, define o caminho da logo para o tema escuro (logo branca/original)
+        if (logo) {
+          logo.src = "../img/logo2.png"; // <-- Ajuste o caminho da sua logo escura/original aqui se necessário
+        }
       } else {
+        // MUDANDO PARA O TEMA CLARO
         document.body.classList.remove('tema-escuro');
         document.body.classList.add('tema-claro');
         icone.src = "../icon/sol.png";
+        
+        // Se a logo existir, define o caminho da logo para o tema claro (logo roxa/escura)
+        if (logo) {
+          logo.src = "../img/logo2-claro.png"; // <-- Ajuste o caminho da sua nova logo clara aqui
+        }
       }
     });
   }

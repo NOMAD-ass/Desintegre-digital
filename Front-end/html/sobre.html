@@ -14,31 +14,32 @@
 <body class="tema-escuro">
 
     <header>
-        <nav>
-            <a href="inicial.html" class="logo-placeholder"
-                style="font-weight: 700; color: var(--secondary-color);">Desintegre</a>
+       <nav>
+        <a href="inicial.html" class="logo-container">
+    <img src="../img/logo2.png" alt="Logo Desintegre Digital" class="logo-img">
+</a>
 
-            <ul class="nav-list">
-                <li><a href="inicial.html" data-text="Home" class="active">Home</a></li>
-                <li><a href="servicos.html" data-text="Serviços">Serviços</a></li>
-                <li><a href="sobre.html" data-text="Sobre">Sobre</a></li>
-                <li><a href="contatos.html" data-text="Contatos">Contatos</a></li>
-                <li><a href="acompanhamento.html" data-text="Acompanhar">Acompanhar</a></li>
-                <li><button id="botaoLogin" class="botao-login">Login</button></li>
-            </ul>
+        <ul class="nav-list">
+            <li><a href="inicial.html" data-text="Home" class="active">Home</a></li>
+            <li><a href="#secao-servicos" data-text="Serviços">Serviços</a></li>
+            <li><a href="./sobre.html" data-text="Sobre">Sobre</a></li>
+            <li><a href="./contatos.html" data-text="Contatos">Contatos</a></li>
+            <li><a href="./acompanhamento.html" data-text="Acompanhar">Acompanhar</a></li>
+            <li><button id="botaoLogin" class="botao-login">Login</button></li>
+        </ul>
 
-            <button id="botaoTema" aria-label="Alternar tema">
-                <img id="iconeTema" src="../icon/lua.png" alt="Ícone de tema">
-            </button>
+        <button id="botaoTema" aria-label="Alternar tema">
+            <img id="iconeTema" src="../icon/lua.png" alt="Ícone de tema">
+        </button>
 
-            <div class="mobile-menu">
-                <div class="line1"></div>
-                <div class="line2"></div>
-                <div class="line3"></div>
-            </div>
-        </nav>
+        <div class="mobile-menu">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
 
-        <div class="divisor-nav"></div>
+    <div class="divisor-nav"></div>
 
     </header>
 
@@ -64,7 +65,7 @@
         </section>
         <section class="sobre-valores">
             <div class="valores-titulo">
-                <h2>Nossos Valores</h2>
+                <h2>Nossos princípios</h2>
             </div>
 
             <div class="container-sobre">
@@ -72,29 +73,34 @@
 
                     <article class="card-valor">
                         <div class="valor-icone">
-                            <img src="../icon/cadeado.png" alt="Confidencialidade">
+                            <img src="../icon/missão.png" alt="Missão">
                         </div>
-                        <h3>Confidencialidade</h3>
-                        <p>Tratamos as informações de nossos clientes com o mais alto nível de sigilo, garantindo
-                            discrição absoluta em cada etapa.</p>
+                        <h3>Missão</h3>
+                        <p>Garantir a destruição segura e certificada de dados e mídias digitais, protegendo informações
+                            sensíveis de empresas e pessoas, com transparência, confiabilidade e conformidade com a
+                            LGPD.</p>
                     </article>
 
                     <article class="card-valor">
                         <div class="valor-icone">
-                            <img src="../icon/planeta.png" alt="Sustentabilidade">
+                            <img src="../icon/visão.png" alt="visão">
                         </div>
-                        <h3>Sustentabilidade</h3>
-                        <p>Compromisso com o meio ambiente através do descarte ecológico e reciclagem correta dos
-                            resíduos eletrônicos gerados.</p>
+                        <h3>Visão</h3>
+                        <p>Ser reconhecida como referência nacional em destruição certificada de dados, oferecendo
+                            soluções inovadoras, seguras e sustentáveis para a proteção da informação.</p>
                     </article>
 
                     <article class="card-valor">
                         <div class="valor-icone">
-                            <img src="../icon/raio.png" alt="Inovação">
+                            <img src="../icon/valores.png" alt="Valores">
                         </div>
-                        <h3>Inovação Técnica</h3>
-                        <p>Uso constante de tecnologias avançadas e homologadas internacionalmente para superar os
-                            padrões de segurança física e lógica.</p>
+                        <h3>Valores</h3>
+                        <p>Integridade dos dados
+                            <br>
+                           agir conforme a lei (LGPD) 
+                           <br>
+                           Ética profissional
+                        </p>
                     </article>
 
                 </div>
@@ -164,7 +170,7 @@
         </div>
     </footer>
 
-<!-- ============ MODAL DE LOGIN / CADASTRO ============ -->
+    <!-- ============ MODAL DE LOGIN / CADASTRO ============ -->
     <div id="modalAuth" class="modal-overlay">
         <div class="modal-caixa">
             <button type="button" id="fecharModalAuth" class="modal-fechar" aria-label="Fechar">&times;</button>

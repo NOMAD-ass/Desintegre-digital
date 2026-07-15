@@ -90,7 +90,7 @@ nav {
     top: 0;
     left: 0;
     width: 100%;
-    height: 7vh; 
+    height: 10vh; 
     display: flex;
     justify-content: space-between;
     align-items: center; 
@@ -103,10 +103,25 @@ nav {
     transition: background-color 0.3s ease;
 }
 
-.logo-placeholder {
-    font-size: 1.5rem;
-    font-weight: 700;
+/* Container do link da logo */
+.logo-container {
+    display: flex;
+    align-items: center;
+    height: 100%; /* Ocupa a altura total disponível na nav */
     z-index: 1010;
+}
+
+/* Ajustes da imagem da logo */
+.logo-img {
+    height: 85%;      /* Aumenta a logo para ocupar quase toda a altura da barra */
+    width: auto;      /* Mantém a largura proporcional automática */
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+/* Efeito sutil ao passar o mouse */
+.logo-container:hover .logo-img {
+    transform: scale(1.03);
 }
 
 .nav-list {
@@ -625,20 +640,20 @@ body.tema-claro #botaoTema:hover {
 }
 
 .card-icone {
-    width: 70px;
-    height: 70px;
-    background-color: rgba(157, 84, 227, 0.15); 
-    border-radius: 50%;
     display: flex;
-    align-items: center;
     justify-content: center;
-    margin: 0 auto 25px auto;
-    border: 1px solid rgba(157, 84, 227, 0.3);
+    align-items: center;
+    margin: 0 auto 25px;
+    background: transparent; /* remove o círculo */
+    border: none;            /* remove a borda */
+    width: auto;
+    height: auto;
+    border-radius: 0;
 }
 
 .card-icone img {
-    width: 35px;
-    height: 35px;
+    width: 200px;   /* ajuste o tamanho conforme desejar */
+    height: 200px;
     object-fit: contain;
 }
 
